@@ -1,0 +1,35 @@
+/**
+* File Name: NumberBet.java
+*
+* File Description: 
+*
+* Date Created: 05/26/2021 
+*
+* Author: Evan Silverthorn, Robert Edmonston 
+* Email: silvee49322@gmail.com, bedmonston@icloud.com
+*
+* Updated:
+*/
+
+public class NumberBet extends Bet
+{
+  int number;
+
+  void setNumber(int aNumber)
+  {
+    number = aNumber;
+  }
+
+  boolean isWinner(RouletteSpin spin)
+  {
+    if (spin.getNumber() == number) {
+      return true;
+    }
+    return false;
+  }
+
+  public int payout()
+  {
+    return 35 * wagerAmount;
+  }
+}
