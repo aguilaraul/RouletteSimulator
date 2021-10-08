@@ -1,15 +1,13 @@
 /**
-* File Name: Accounts.java
-*
-* File Description: 
-*
-* Date Created: 05/26/2021 
-*
-* Author: Evan Silverthorn, Robert Edmonston 
-* Email: silvee49322@gmail.com, bedmonston@icloud.com
-*
-* Updated:
-*/
+ * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
+ * @Date:     October 07 2021
+ * FA21 CS 210 5198 Final Project
+ * Roulette Simulator Application (RSA)
+ * 
+ * Based on code by:
+ * Evan Silverthorn (silvee49322@gmail.com)
+ * and Robert Edmonston ( bedmonston@icloud.com)
+ */
 
 import java.io.File;
 import java.util.Scanner;

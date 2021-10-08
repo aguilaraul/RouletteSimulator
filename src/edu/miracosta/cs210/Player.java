@@ -1,19 +1,15 @@
 /**
-* File Name: Account.java
-*
-* File Description: 
-*
-* Date Created: 05/26/2021 
-*
-* Author: Evan Silverthorn, Robert Edmonston 
-* Email: silvee49322@gmail.com, bedmonston@icloud.com
-*
-* Updated:
-*/
-import java.text.NumberFormat;
+ * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
+ * @Date:     October 07 2021
+ * FA21 CS 210 5198 Final Project
+ * Roulette Simulator Application (RSA)
+ * 
+ * Based on code by:
+ * Evan Silverthorn (silvee49322@gmail.com)
+ * and Robert Edmonston ( bedmonston@icloud.com)
+ */
 
-public class Player
-{
+public class Player {
   private String name;
   private int balance;
   //private boolean isBankrupt = false;
@@ -23,14 +19,12 @@ public class Player
     this.balance = 1000;
   }
 
-  public Player(String aName, int aBalance)
-  {
+  public Player(String aName, int aBalance) {
     name = aName;
     balance = aBalance;
   }
 
-  public int getBalance()
-  {
+  public int getBalance() {
     return balance;
   }
 
@@ -49,11 +43,4 @@ public class Player
     // Useful if we want to limit what a Player name can be
     name = newName;
   }
-
-  // public String formattedBalance()
-  // {
-  //   NumberFormat currency = NumberFormat.getCurrencyInstance();
-  //     String formattedBalance = currency.format(balance);
-  //     return formattedBalance;
-  // }
 }

@@ -1,8 +1,13 @@
 /**
  * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
- * @Date:     October 7, 2021
+ * @Date:     October 07 2021
  * FA21 CS 210 5198 Final Project
  * Roulette Simulator Application (RSA)
+ * 
+ * Based on code by:
+ * Evan Silverthorn (silvee49322@gmail.com)
+ * and Robert Edmonston ( bedmonston@icloud.com)
+ * 
  * 
  * RouletteTable
  */
@@ -26,8 +31,6 @@ private int wagerAmount;
   public void play(String name, int balance) {
     this.name = name;
     this.balance = balance;
-    
-    //this.bet = createBet();
 
     this.bet = placeBet(chooseBetType());
     if (this.bet != null) {
@@ -163,6 +166,7 @@ private int wagerAmount;
   /* Roulette Spin */
   private void spinWheel() {
     winningNumber = (int) ((Math.random() * (WHEELHIGH - WHEELLOW)) + WHEELLOW);   
+    displaySpin();
     if (bet.isWinner(winningNumber)) {
       System.out.println("You won!!!!");
       this.balance = balance + bet.payout();
