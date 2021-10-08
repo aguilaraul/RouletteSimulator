@@ -27,10 +27,9 @@ public class ColorBet extends Bet
     betColor = aColor;
   }
 
-  boolean isWinner(RouletteSpin spin)
+  boolean isWinner(int winningNumber)
   {
     boolean didWin = false;
-    int winningNumber = spin.getNumber();
     int colorIndex = (betColor == Color.RED) ? 0 : 1;
     int numbers[] = colorInfo[colorIndex];
     for (int i=0;i<numbers.length;i++)

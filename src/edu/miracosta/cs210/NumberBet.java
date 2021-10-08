@@ -20,9 +20,9 @@ public class NumberBet extends Bet
     number = aNumber;
   }
 
-  boolean isWinner(RouletteSpin spin)
+  boolean isWinner(int winningNumber)
   {
-    if (spin.getNumber() == number) {
+    if (number == winningNumber) {
       return true;
     }
     return false;

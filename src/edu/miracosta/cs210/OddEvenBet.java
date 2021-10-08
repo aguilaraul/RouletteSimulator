@@ -19,7 +19,7 @@ public class OddEvenBet extends Bet
     isEven = value;
   }
 
-  boolean isWinner(RouletteSpin spin) {
-    return (spin.getNumber() % 2 == 0) ? isEven : !isEven;
+  boolean isWinner(int winningNumber) {
+    return (winningNumber % 2 == 0) ? isEven : !isEven;
   }
 }

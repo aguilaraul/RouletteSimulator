@@ -23,7 +23,7 @@ public class Bet {
   {
     wagerAmount = amt;
   }
-  boolean isWinner(RouletteSpin spin)
+  boolean isWinner(int winningNumber)
   {
     return false;
   }
