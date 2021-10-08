@@ -1,63 +1,27 @@
-## Final Group Project 
+# Software Requirements Specifications
+## 1. Introduction
+### 1.1 Purpose
+This SRS describes the general requirements for version 1.0 of the Roulette Simulator Application (RSA). This document is intended to be used by project team members who will be responsible for implementing and verifying the correct functioning of the application.  
 
-# Instructions
- 
-•	Must implement something from each topic covered in class in useful way. See checklist.
-•	Cannot go outside the scope of the class, the point is to see what you can create with
-the knowledge and tools gained from this course (and CS111 covered chapters).  
-•	Cannot be related to a homework or book project, come up with something new!  
-•	Other than that, whatever you want!  The final project is open­ended.
-•	Every group should include a minimum of two students and maximum number of four students. 
-•	Include names of every member of the group within the project details on the top of your code.  
-•	Project discussion for every group is due on 05/20/2021
-•	Your complete Group Project is due on 05/25/2021.
-•	Every member of the group should participate equally in the project development. 
+### 1.2 Document Conventions
+No special typographical conventions are used in this SRS.
+### 1.3 Project Scope
+### 1.4 References
 
-You are required to submit the following: 
-	Your group project name and the names of every member of your group. 
-	Project Proposal: write a paragraph describing what your project will be, outlining its purpose and functionality with the enough detail to have a good idea of what you are trying to accomplish. Submit in word documents or PDF
-	High Level pseudocode of your project. Submit in word documents or PDF
-	Detailed pseudocode of your project. Include every team member role in the project. Submit in word documents or PDF
-	Source code: your code should cover the following topics: 
+## 2. Overall Description
+### 2.1 Product Perspective
+The RSA 1.0 release will be a relatively simple one designed to support just enough features to be considered a “minimum viable product”.  
 
-Topics Checklist:  
-❒ Branching: For loop, while loop, do-while loop   
-❒ Switch Statements   
-❒ Classes: Objects, Constructors.
-❒ Inheritance. 
-❒ Array. 
-❒ Text File I/O.
-❒ Formatted output. 
+[Insert System Context Diagram]  
 
+## 2.2 User Classes and Characteristics
+| Classes | Description |
+| ------- | ----------- |
+| Player (user) | The application will have a User class in this release (called “Player”). A Player may be defined as someone who is playing the roulette simulator for fun or educational purposes. Players will be allowed to save their names and virtual bankroll as a “profile” within the application, and to load this information next time they play.|
+| Administrator (Casino Staff) | n/a |
 
-
-Project Submission Instructions:  
-•	Submit your code in repl.it ,and your complete project in canvas individually. 
-•	In canvas, Compress into one ZIP file: ( http://www.wikihow.com/Zip­Files­Together )  
--	Include all JAVA files used in your project .
--	Any other files necessary for your project to work (i.e. Text files for input)  
-•	Name your project ‘fp-studentName.zip’
-Final complete project is due 05/25/2021. 
-
-
-**Warning.** no worning for this project
-
-# Example Input
-
-```
-
-
-```
-
-# Example Output
-
-```
-
-
-```
-
-# Hint
-
-1. 
-2. 
-3. 
+## 3. System Features
+### 3.1 Player Account
+#### 3.1.1 Description
+The application will allow users to maintain a personal profile which will be read from and saved to a file. Data that will be stored includes the user’s name, account balance, and betting history. When the application is started it will ask the user for their name and load the data from the file with their name, and if no file exists it will create a new one and give them a balance of $1000.00.  
+#### 3.1.2 Functional Requirements
