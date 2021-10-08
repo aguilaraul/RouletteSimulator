@@ -28,7 +28,6 @@ class Main{
       System.out.println("Please enter your name : ");
       Scanner input = new Scanner(System.in);
       String name = input.next();
-      input.close();
       player = AccountsManager.loadPlayer(name);
       playerName = player.getName();
       playerBalance = player.getBalance();
@@ -42,7 +41,7 @@ class Main{
       {
         table.play(playerName, playerBalance);
       }
-      table.endGame();
+      input.close();
     }
 
     // public static Player loadPlayer()

@@ -13,68 +13,74 @@ import java.text.NumberFormat;
 public class RouletteTable {
 private final int WHEELLOW = 36;
 private final int WHEELHIGH = 0;
-private final Scanner in = new Scanner(System.in);
+private final Text text = new Text();
+private final Scanner input = new Scanner(System.in);
 
 private Bet bet;
 private String name;
 private int balance;
 private int winningNumber;
-private int newBalance;
+private int wagerAmount;
 
 
   public void play(String name, int balance) {
-      this.name = name;
-      this.balance = balance;
+    this.name = name;
+    this.balance = balance;
+    
+    //this.bet = createBet();
 
-      this.bet = createBet();
-      if (this.bet == null) {
-          System.out.println("Thanks for playing " + name);
-          System.out.println("Your ending balance is " + formattedBalance(balance));
-      }
+    this.bet = placeBet(chooseBetType());
+    if (this.bet != null) {
       spinWheel();
-      System.out.println("New balance is " + formattedBalance(balance));
+    } else {
+      endGame();
+    }
+    return;
   }
 
   public void endGame() {
+    System.out.println("ENDING BALANCE:" + this.balance);
       AccountsManager.savePlayer(this.name, this.balance);
       displayEndGame();
+      System.exit(0);
   }
 
   /* Placing bets */
-  public Bet createBet()
-  {
-    this.bet = null;
+  private int chooseBetType() {
+    text.displayBetMenu();
+    int choice = input.nextInt();
+    
+    return choice;
+  }
+
+  private int wager() {
     System.out.println("How much would you like to wager? (enter 0 to stop playing)");
-    int amount = -1;
+    int wager = input.nextInt(); // #debug error checking
+
     do {
-      if (amount > this.balance) {
+      if (wager > this.balance) {
         System.out.println("Amount must not exceed account balance of " + formattedBalance(this.balance));
         System.out.println("How much would you like to wager?");
       }
-      if(in.hasNextInt()) {
-        amount = in.nextInt();
-      } else {
-        amount = 0;
+      wager = input.nextInt();
+      if (wager <= 0) {
+        return -1;
       }
-      if (amount <= 0) {
-        return null;
-      }
-    } while (amount > this.balance);
-    /* creatBet should end here */
+    } while (wager > this.balance);
+    System.out.println("Your $" + wager + " wager has been placed!");
+    this.wagerAmount = wager;
+    return wager;
+  }
 
-    /* Choosing type of bet begins here */
-    // Display menu first. Should be in Text class #cleanup
-    System.out.println("What type of bet would you like to make? (1-3 or 0 to exit)");
-    System.out.println("1) Number Bet");
-    System.out.println("2) Color Bet");
-    System.out.println("3) Odd/Even Bet");
-    int choice = in.nextInt();                // #debug Error-checking here
+
+  public Bet placeBet(int choice) {
+    int wager = wager();
     switch (choice)
     {
       case 1:
         // Can be moved to NumberBet class and run function #cleanup
         NumberBet numberBet = new NumberBet();
-        numberBet.setWagerAmount(amount);
+        numberBet.setWagerAmount(wager);
         System.out.println
         ("Please enter the number you'd like to bet on (1-36)");
         int number = 1;
@@ -83,54 +89,54 @@ private int newBalance;
           System.out.println("Invalid entry. Number must be between 1-36.");
           System.out.println("Please enter the number you'd like to bet on (1-36)");
         }
-          number = in.nextInt();
+          number = input.nextInt();
         } while (number > 36 || number < 1);
         numberBet.setNumber(number);
-        this.bet = numberBet;
-      break;
+        return this.bet = numberBet;
 
       case 2:
         // #cleanup
         ColorBet colorBet = new ColorBet();
-        colorBet.setWagerAmount(amount);
+        colorBet.setWagerAmount(wager);
         System.out.println("Enter '1' for Red or '2' for Black");
         int color = -1;
         do {
-          color = in.nextInt();
+          color = input.nextInt();
           if (color <1 || color > 2) {
             System.out.println("Invalid Entry. Enter '1' for Red or '2' for Black");
           }
         } while (color != 1 && color !=2);
         Color aColor = (color==1) ? Color.RED : Color.BLACK;
         colorBet.setColor(aColor);
-        this.bet = colorBet;
-      break;
+        return this.bet = colorBet;
 
       case 3:
         // #cleanup
         OddEvenBet oebet = new OddEvenBet();
-        oebet.setWagerAmount(amount);
+        oebet.setWagerAmount(wager);
         System.out.println("Enter '1' for odd or '2' for even");
         int oddEven = -1;
         do {
-          oddEven = in.nextInt();
+          oddEven = input.nextInt();
           if (oddEven <1 || oddEven > 2) {
             System.out.println("Invalid Entry. Enter '1' for odd or '2' for even");
           }
         } while (oddEven != 1 && oddEven !=2);
         oebet.setIsEven(oddEven==2);
-        this.bet = oebet;
-      break;
+        return this.bet = oebet;
+
+      case 0:
+        endGame();
 
       default:
         // Offensive programming - Be sure the code in each case
         // statement's deafult clause fails hard (aborts program) or
         // otherwise impossible to overlook #debug
-      return null;
+        System.exit(0);
+      return this.bet = null;
     }
     //in.close(); #debug
-    System.out.println("Your $" + bet.getWagerAmount() + " wager has been placed!");
-    return bet;
+    
   }
 
 
@@ -166,6 +172,7 @@ private int newBalance;
       this.balance = balance - bet.getWagerAmount();
       //account.setBalance(newBalance);
     }
+    System.out.println("New balance is " + formattedBalance(this.balance));
   }
   
   public int getWinningNumber() {

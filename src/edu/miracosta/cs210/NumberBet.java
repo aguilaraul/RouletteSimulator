@@ -15,21 +15,18 @@ public class NumberBet extends Bet
 {
   int number;
 
-  void setNumber(int aNumber)
-  {
+  void setNumber(int aNumber) {
     number = aNumber;
   }
 
-  boolean isWinner(int winningNumber)
-  {
+  boolean isWinner(int winningNumber) {
     if (number == winningNumber) {
       return true;
     }
     return false;
   }
 
-  public int payout()
-  {
+  public int payout() {
     return 35 * wagerAmount;
   }
 }
