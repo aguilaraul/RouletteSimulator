@@ -16,9 +16,7 @@ import java.util.Scanner;
 import java.text.NumberFormat;
 
 public class RouletteTable {
-private final int WHEELLOW = 36;
-private final int WHEELHIGH = 0;
-private final Text text = new Text();
+  private final Text text = new Text();
 private final Scanner input = new Scanner(System.in);
 
 private Bet bet;
@@ -38,38 +36,35 @@ private int wagerAmount;
     } else {
       endGame();
     }
-    return;
   }
 
   public void endGame() {
     System.out.println("ENDING BALANCE:" + this.balance);
       AccountsManager.savePlayer(this.name, this.balance);
-      displayEndGame();
+      text.displayEndGame(this.name, this.balance);
       System.exit(0);
   }
 
   /* Placing bets */
   private int chooseBetType() {
     text.displayBetMenu();
-    int choice = input.nextInt();
-    
-    return choice;
+
+    return input.nextInt();
   }
 
   private int wager() {
     System.out.println("How much would you like to wager? (enter 0 to stop playing)");
-    int wager = input.nextInt(); // #debug error checking
+    int wager = input.nextInt();
 
-    do {
-      if (wager > this.balance) {
-        System.out.println("Amount must not exceed account balance of " + formattedBalance(this.balance));
+    while (wager > this.balance) {
+        System.out.println("Amount must not exceed account balance of " + text.formattedBalance(this.balance));
         System.out.println("How much would you like to wager?");
-      }
+      System.out.println("HERE"); // #debug
       wager = input.nextInt();
       if (wager <= 0) {
-        return -1;
+        endGame();
       }
-    } while (wager > this.balance);
+    }
     System.out.println("Your $" + wager + " wager has been placed!");
     this.wagerAmount = wager;
     return wager;
@@ -133,7 +128,7 @@ private int wagerAmount;
 
       default:
         // Offensive programming - Be sure the code in each case
-        // statement's deafult clause fails hard (aborts program) or
+        // statement's default clause fails hard (aborts program) or
         // otherwise impossible to overlook #debug
         System.exit(0);
       return this.bet = null;
@@ -165,7 +160,9 @@ private int wagerAmount;
 
   /* Roulette Spin */
   private void spinWheel() {
-    winningNumber = (int) ((Math.random() * (WHEELHIGH - WHEELLOW)) + WHEELLOW);   
+    int wheelLow = 0;
+    int wheelHigh = 36;
+    winningNumber = (int) ((Math.random() * (wheelHigh - wheelLow)) + wheelLow);
     displaySpin();
     if (bet.isWinner(winningNumber)) {
       System.out.println("You won!!!!");
@@ -176,24 +173,11 @@ private int wagerAmount;
       this.balance = balance - bet.getWagerAmount();
       //account.setBalance(newBalance);
     }
-    System.out.println("New balance is " + formattedBalance(this.balance));
+    System.out.println("New balance is " + text.formattedBalance(this.balance));
   }
   
   public int getWinningNumber() {
     return winningNumber;
   }
-
-
-  /* Text Format */
-  private String formattedBalance(int balance) {
-    NumberFormat currency = NumberFormat.getCurrencyInstance();
-    String formattedBalance = currency.format(balance);
-    return formattedBalance;
-  }
-
-  public void displayEndGame() {
-    System.out.println("Thanks for playing " + this.name);
-    System.out.println("Your ending balance is " + formattedBalance(this.balance));
-  } 
 
 }

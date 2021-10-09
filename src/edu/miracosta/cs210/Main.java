@@ -32,6 +32,7 @@ class Main {
     
     // Gameplay
     while (keepPlaying) {
+      System.out.println("Inside the main"); // #debug
       table.play(playerName, playerBalance);
     }
     input.close();
