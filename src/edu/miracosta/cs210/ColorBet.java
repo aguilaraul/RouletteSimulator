@@ -1,24 +1,21 @@
 /**
-* File Name: ColorBet.java
-*
-* File Description: 
-*
-* Date Created: 05/26/2021 
-*
-* Author: Evan Silverthorn, Robert Edmonston 
-* Email: silvee49322@gmail.com, bedmonston@icloud.com
-*
-* Updated:
-*/
+ * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
+ * @Date:     October 10, 2021
+ * FA21 CS 210 5198 Final Project
+ * Roulette Simulator Application (RSA)
+ *
+ * Based on code by:
+ * Evan Silverthorn (silvee49322@gmail.com)
+ * and Robert Edmonston ( bedmonston@icloud.com)
+ *
+ * ColorBet.java
+ */
 
-public class ColorBet extends Bet
-{
-  private int blackNumbers[] = {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
-
-  private int redNumbers[] = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
-
+public class ColorBet extends Bet {
+  private final int[] blackNumbers = {2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
+  private final int[] redNumbers = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
   //Used to see if a winning number is either a red or black number
-  private int colorInfo[][] = {redNumbers, blackNumbers};
+  private final int[][] colorInfo = {redNumbers, blackNumbers};
 
   private Color betColor;
 
@@ -27,18 +24,14 @@ public class ColorBet extends Bet
     betColor = aColor;
   }
 
-  boolean isWinner(int winningNumber)
-  {
-    boolean didWin = false;
+  boolean isWinner(int winningNumber) {
     int colorIndex = (betColor == Color.RED) ? 0 : 1;
-    int numbers[] = colorInfo[colorIndex];
-    for (int i=0;i<numbers.length;i++)
-    {
-      if (numbers[i] == winningNumber) {
-        didWin = true;
-        break;
+    int[] numbers  = colorInfo[colorIndex];
+    for (int number : numbers) {
+      if (number == winningNumber) {
+        return true;
       }
     }
-    return didWin;
+    return false;
   }
 }

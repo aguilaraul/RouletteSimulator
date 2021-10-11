@@ -1,12 +1,14 @@
 /**
  * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
- * @Date:     October 07 2021
+ * @Date:     October 10, 2021
  * FA21 CS 210 5198 Final Project
  * Roulette Simulator Application (RSA)
  * 
  * Based on code by:
  * Evan Silverthorn (silvee49322@gmail.com)
  * and Robert Edmonston ( bedmonston@icloud.com)
+ *
+ * AccountsManager.java
  */
 
 import java.io.File;
@@ -33,17 +35,17 @@ class AccountsManager {
     }
   }
 
-  public static Player loadPlayer(String name)
-  {
+  public static Player loadPlayer(String name) {
     int balance = 1000;
     String filename = name.toLowerCase() + ".txt";
     try {
       File myObj = new File(filename);
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
-        String data = myReader.nextLine();
         System.out.println("Returning user - loading previous account balance...");
+        String data = myReader.nextLine();
         balance = Integer.parseInt(data);
+        System.out.println("You're balance is: $" + balance);
       }
       myReader.close();
     } catch (FileNotFoundException e) {

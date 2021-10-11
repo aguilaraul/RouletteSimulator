@@ -1,3 +1,16 @@
+/**
+ * @Authors:  Raul Aguilar, Robert Edmonston, Austin Garrison
+ * @Date:     October 10, 2021
+ * FA21 CS 210 5198 Final Project
+ * Roulette Simulator Application (RSA)
+ *
+ * Based on code by:
+ * Evan Silverthorn (silvee49322@gmail.com)
+ * and Robert Edmonston ( bedmonston@icloud.com)
+ *
+ * Text.java
+ */
+
 import java.text.NumberFormat;
 
 public class Text {
@@ -6,6 +19,7 @@ public class Text {
         return currency.format(balance);
     }
 
+    //** Roulette Table **//
     void displayBetMenu() {
         System.out.println("What type of bet would you like to make? (1-3 or 0 to exit)");
         System.out.println("1) Number Bet");

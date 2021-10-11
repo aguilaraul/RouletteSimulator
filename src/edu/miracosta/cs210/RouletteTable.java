@@ -1,6 +1,6 @@
 /**
  * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
- * @Date:     October 07 2021
+ * @Date:     October 10, 2021
  * FA21 CS 210 5198 Final Project
  * Roulette Simulator Application (RSA)
  * 
@@ -13,23 +13,27 @@
  */
 
 import java.util.Scanner;
-import java.text.NumberFormat;
 
 public class RouletteTable {
   private final Text text = new Text();
-private final Scanner input = new Scanner(System.in);
+  private final Scanner input = new Scanner(System.in);
 
-private Bet bet;
-private String name;
-private int balance;
-private int winningNumber;
-private int wagerAmount;
+  private Boolean keepPlaying = true;
+  private Bet bet;
+  private String name;
+  private int balance;
+  private int winningNumber;
+  private int wagerAmount;
 
-
-  public void play(String name, int balance) {
+  public void RouletteTable(String name, int balance) {
     this.name = name;
     this.balance = balance;
+    while(keepPlaying()) {
+      play();
+    }
+  }
 
+  public void play() {
     this.bet = placeBet(chooseBetType());
     if (this.bet != null) {
       spinWheel();
@@ -38,18 +42,26 @@ private int wagerAmount;
     }
   }
 
+  public Boolean keepPlaying() {
+    return this.keepPlaying;
+  }
+
   public void endGame() {
-    System.out.println("ENDING BALANCE:" + this.balance);
-      AccountsManager.savePlayer(this.name, this.balance);
-      text.displayEndGame(this.name, this.balance);
-      System.exit(0);
+    System.out.println("ENDING BALANCE:" + this.balance); // #debug
+    AccountsManager.savePlayer(this.name, this.balance);
+    text.displayEndGame(this.name, this.balance);
+    keepPlaying = false;
+    System.exit(0);
   }
 
   /* Placing bets */
   private int chooseBetType() {
     text.displayBetMenu();
-
-    return input.nextInt();
+    int choice = input.nextInt();
+    if(choice == 0) { // check that an integer is, in fact, entered. #error-check
+      endGame();
+    }
+    return choice;
   }
 
   private int wager() {
@@ -73,8 +85,7 @@ private int wagerAmount;
 
   public Bet placeBet(int choice) {
     int wager = wager();
-    switch (choice)
-    {
+    switch (choice) {
       case 1:
         // Can be moved to NumberBet class and run function #cleanup
         NumberBet numberBet = new NumberBet();
@@ -97,7 +108,7 @@ private int wagerAmount;
         ColorBet colorBet = new ColorBet();
         colorBet.setWagerAmount(wager);
         System.out.println("Enter '1' for Red or '2' for Black");
-        int color = -1;
+        int color;
         do {
           color = input.nextInt();
           if (color <1 || color > 2) {
@@ -113,7 +124,7 @@ private int wagerAmount;
         OddEvenBet oebet = new OddEvenBet();
         oebet.setWagerAmount(wager);
         System.out.println("Enter '1' for odd or '2' for even");
-        int oddEven = -1;
+        int oddEven;
         do {
           oddEven = input.nextInt();
           if (oddEven <1 || oddEven > 2) {
@@ -133,28 +144,23 @@ private int wagerAmount;
         System.exit(0);
       return this.bet = null;
     }
-    //in.close(); #debug
-    
   }
 
 
   /* Roulette Wheel */
-  public void displaySpin()
-  {
-      System.out.println("Spinning wheel!");
-      for (int i=0;i<400;i++)
-      {
-          if (i%10 == 0)
-          {
-              System.out.print(".");
-              try {
-                  Thread.sleep(125);
-              } catch (InterruptedException e) {
-                  e.printStackTrace();
-              }
-          }
+  public void displaySpin() {
+    System.out.println("Spinning wheel!");
+    for (int i=0;i<400;i++) {
+      if (i%10 == 0) {
+        System.out.print(".");
+        try {
+          Thread.sleep(125);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
       }
-      System.out.println("|" + getWinningNumber() + "|");
+    }
+    System.out.println("|" + getWinningNumber() + "|");
   }
 
 
@@ -167,11 +173,9 @@ private int wagerAmount;
     if (bet.isWinner(winningNumber)) {
       System.out.println("You won!!!!");
       this.balance = balance + bet.payout();
-      //account.setBalance(newBalance);
     } else {
       System.out.println("You lost :(");
       this.balance = balance - bet.getWagerAmount();
-      //account.setBalance(newBalance);
     }
     System.out.println("New balance is " + text.formattedBalance(this.balance));
   }
