@@ -1,4 +1,4 @@
-/**
+package edu.miracosta.cs210.roulettesimulator; /**
  * @Authors:  Raul Aguilar, Robert Edmonston, Austin Garrison
  * @Date:     October 10, 2021
  * FA21 CS 210 5198 Final Project

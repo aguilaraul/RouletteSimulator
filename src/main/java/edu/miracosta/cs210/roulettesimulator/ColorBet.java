@@ -1,3 +1,5 @@
+package edu.miracosta.cs210.roulettesimulator;
+
 /**
  * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
  * @Date:     October 10, 2021

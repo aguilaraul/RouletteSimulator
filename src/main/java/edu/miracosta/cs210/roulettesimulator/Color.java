@@ -1,3 +1,5 @@
+package edu.miracosta.cs210.roulettesimulator;
+
 /**
 * File Name: Color.java
 *
