@@ -12,7 +12,7 @@ No special typographical conventions are used in this SRS.
 ### 2.1 Product Perspective
 The RSA 1.0 release will be a relatively simple one designed to support just enough features to be considered a “minimum viable product”.  
 
-[Insert System Context Diagram]  
+![System Context Diagram](/docs/final-project_system-context-diagram.png)
 
 ## 2.2 User Classes and Characteristics
 | Classes | Description |
