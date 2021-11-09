@@ -15,7 +15,7 @@ package edu.miracosta.cs210.roulettesimulator; /**
 import java.util.Scanner;
 
 public class RouletteTable {
-  private final Text text = new Text();
+  private final Text text = Text.getInstance();
   private final Scanner input = new Scanner(System.in);
 
   private Boolean keepPlaying = true;

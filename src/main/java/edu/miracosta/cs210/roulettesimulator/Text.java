@@ -1,4 +1,4 @@
-package edu.miracosta.cs210.roulettesimulator; /**
+/**
  * @Authors:  Raul Aguilar, Robert Edmonston, Austin Garrison
  * @Date:     October 10, 2021
  * FA21 CS 210 5198 Final Project
@@ -11,9 +11,31 @@ package edu.miracosta.cs210.roulettesimulator; /**
  * Text.java
  */
 
+package edu.miracosta.cs210.roulettesimulator;
+
 import java.text.NumberFormat;
 
-public class Text {
+public final class Text {
+
+    /**
+     * Private constructor so nobody can instantiate the class.
+     */
+    private Text() {
+    }
+
+    /**
+     * Static to class instance of the class.
+     */
+    private static final Text INSTANCE = new Text();
+
+    /**
+     * To be called by user to obtain instance of the class
+     * @return instance of the singleton
+     */
+    public static Text getInstance() {
+        return INSTANCE;
+    }
+
     String formattedBalance(int balance) {
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         return currency.format(balance);
