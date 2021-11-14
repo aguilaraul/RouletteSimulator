@@ -3,14 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #39db85;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.MenuBarController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0"
+            prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #39db85;"
+            xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.miracosta.cs210.roulettesimulator.MenuBarController">
     <top>
         <MenuBar style="-fx-background-color: #a8ffd1;" BorderPane.alignment="CENTER">
             <Menu mnemonicParsing="false" text="File">
-                <MenuItem mnemonicParsing="false" text="Close" />
+                <MenuItem text="Close" mnemonicParsing="false" onAction="#onCloseMenuClick" />
             </Menu>
             <Menu mnemonicParsing="false" text="Player">
-                <MenuItem fx:id="statsMenu" mnemonicParsing="false" onAction="#onStatsMenuClick" text="Stats" />
+                <MenuItem text="Stats" mnemonicParsing="false" onAction="#onStatsMenuClick" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <MenuItem mnemonicParsing="false" text="About" />

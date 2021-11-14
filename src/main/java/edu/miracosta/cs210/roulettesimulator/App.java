@@ -29,6 +29,8 @@ public class App extends Application {
     public void changeScene(String fxml, String title) throws IOException {
         Parent newScene = FXMLLoader.load(getClass().getResource(fxml));
         window.getScene().setRoot(newScene);
+        window.setMinWidth(640.0);
+        window.setMinHeight(480.0);
         window.setTitle(title);
     }
 

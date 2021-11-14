@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="250.0" minWidth="250.0" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #42f59b;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.LoginController">
    <children>
-      <TextField fx:id="usernameField" promptText="Username" layoutX="51.0" layoutY="80.0"  />
-      <PasswordField fx:id="passwordField" promptText="Password" layoutX="51.0" layoutY="113.0" />
-      <Button fx:id="loginButton" text="Login" layoutX="148.0" layoutY="158.0" mnemonicParsing="false" onAction="#onLoginButtonClick" />
+      <TextField fx:id="usernameField" layoutX="51.0" layoutY="80.0" promptText="Username" />
+      <PasswordField fx:id="passwordField" layoutX="51.0" layoutY="113.0" promptText="Password" />
+      <Button fx:id="loginButton" layoutX="148.0" layoutY="158.0" mnemonicParsing="false" onAction="#onLoginButtonClick" text="Login" />
    </children>
 </Pane>
