@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class LoginController {
     boolean validLogin = false;
 
@@ -21,7 +23,12 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    protected void onLoginButtonClick() {
+    protected void onLoginButtonClick() throws IOException {
+        checkLogin();
+    }
+
+    private void checkLogin() throws IOException {
+        App app = new App();
         String username = usernameField.getText();
 
         if(username.isEmpty()) {
@@ -32,11 +39,8 @@ public class LoginController {
         }
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
             validLogin = true;
-//            player = AccountsManager.loadPlayer(username);
-//            int balance = player.getBalance();
-//            table.RouletteTable(username, balance);
 
-            //welcomeText.setText("Welcome to Roulette Simulator!");
+            app.changeScene("game-view.fxml", "Roulette Simulator");
         }
     }
 }
