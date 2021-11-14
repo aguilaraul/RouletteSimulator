@@ -3,13 +3,13 @@ package edu.miracosta.cs210.roulettesimulator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController {
-    RouletteTable table = new RouletteTable();
-    Player player;
+    boolean validLogin = false;
 
     @FXML
     private Label welcomeText;
@@ -17,6 +17,8 @@ public class LoginController {
     private TextField usernameField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button loginButton;
 
     @FXML
     protected void onLoginButtonClick() {
@@ -29,12 +31,12 @@ public class LoginController {
             passwordField.setPromptText("Enter a password");
         }
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
+            validLogin = true;
 //            player = AccountsManager.loadPlayer(username);
 //            int balance = player.getBalance();
 //            table.RouletteTable(username, balance);
 
-            welcomeText.setText("Welcome to Roulette Simulator!");
+            //welcomeText.setText("Welcome to Roulette Simulator!");
         }
-
     }
 }
