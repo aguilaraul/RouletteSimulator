@@ -6,7 +6,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0"
             prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #39db85;"
             xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.miracosta.cs210.roulettesimulator.MenuBarController">
+            fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
         <MenuBar style="-fx-background-color: #a8ffd1;" BorderPane.alignment="CENTER">
             <Menu mnemonicParsing="false" text="File">

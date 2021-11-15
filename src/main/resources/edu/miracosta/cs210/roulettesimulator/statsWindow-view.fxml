@@ -8,7 +8,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.StatsWindow">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.miracosta.cs210.roulettesimulator.StatsWindow">
    <bottom>
       <Button fx:id="closeButton" onAction="#onCloseButtonClick" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER" />
    </bottom>

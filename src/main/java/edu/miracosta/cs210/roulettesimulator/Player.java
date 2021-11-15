@@ -13,7 +13,7 @@ package edu.miracosta.cs210.roulettesimulator;
 
 public class Player {
   private String name;
-  private int balance;
+  private double balance;
   //private boolean isBankrupt = false;
 
   public Player(String name) {
@@ -26,7 +26,7 @@ public class Player {
     balance = aBalance;
   }
 
-  public int getBalance() {
+  public double getBalance() {
     return balance;
   }
 

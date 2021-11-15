@@ -12,10 +12,8 @@ import java.io.IOException;
 public class StatsWindow {
     static private Stage window;
 
-    @FXML
-    Label gamesWonValue;
-    @FXML
-    Label currentBalanceValue;
+    @FXML Label gamesWonValue;
+    @FXML Label currentBalanceValue;
 
     @FXML
     protected void onCloseButtonClick() {
