@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/11.0.2"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.miracosta.cs210.roulettesimulator.StatsWindow">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #5f9c65;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.StatsWindow">
    <bottom>
-      <Button fx:id="closeButton" onAction="#onCloseButtonClick" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER" />
+      <Button fx:id="closeButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCloseButtonClick" style="-fx-background-color: #e0e5da;" text="Close" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
@@ -31,12 +23,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="gamesWon" text="Games Won:" />
+            <Label text="Games Won:" />
             <Label fx:id="gamesWonValue" text="0" GridPane.columnIndex="1" />
-            <Label fx:id="gamesLost" text="Games Lost:" GridPane.rowIndex="1" />
+            <Label text="Games Lost:" GridPane.rowIndex="1" />
             <Label fx:id="gamesLostValue" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Win Percentage:" GridPane.rowIndex="2" />
-            <Label fx:id="winPercentValue" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="winPercentageValue" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Total Earnings:" GridPane.rowIndex="3" />
             <Label fx:id="totalEarningsValue" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Total Wager:" GridPane.rowIndex="4" />

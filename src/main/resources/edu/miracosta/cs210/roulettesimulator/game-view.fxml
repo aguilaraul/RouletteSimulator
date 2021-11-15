@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0"
-            prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #39db85;"
-            xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #5a9f64;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
-        <MenuBar style="-fx-background-color: #a8ffd1;" BorderPane.alignment="CENTER">
-            <Menu mnemonicParsing="false" text="File">
-                <MenuItem text="Close" mnemonicParsing="false" onAction="#onCloseMenuClick" />
+        <MenuBar style="-fx-background-color: #e0e5da;" BorderPane.alignment="CENTER">
+            <Menu mnemonicParsing="false" text="Game">
+                <MenuItem mnemonicParsing="false" onAction="#onCloseMenuClick" text="Close" />
             </Menu>
             <Menu mnemonicParsing="false" text="Player">
-                <MenuItem text="Stats" mnemonicParsing="false" onAction="#onStatsMenuClick" />
+                <MenuItem mnemonicParsing="false" onAction="#onStatsMenuClick" text="Stats" />
+            <MenuItem mnemonicParsing="false" text="Logout" />
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <MenuItem mnemonicParsing="false" text="About" />
             </Menu>
         </MenuBar>
     </top>
+   <bottom>
+      <HBox style="-fx-background-color: #41413f;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="CASH" textFill="YELLOW">
+               <font>
+                  <Font name="Serif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="balanceValue" text="\$1,528" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+             <ImageView fitHeight="300.0" pickOnBounds="true" preserveRatio="true">
+                 <Image backgroundLoading="true" url="@board.png" />
+               <viewport>
+                  <Rectangle2D minX="25.0" />
+               </viewport>
+             </ImageView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Bet" />
+                  <Button mnemonicParsing="false" text="Cash Out" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
