@@ -36,13 +36,13 @@ public final class Text {
         return INSTANCE;
     }
 
-    String formattedBalance(int balance) {
+    public String formattedBalance(double balance) {
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         return currency.format(balance);
     }
 
     //** Roulette Table **//
-    void displayBetMenu() {
+    public void displayBetMenu() {
         System.out.println("What type of bet would you like to make? (1-3 or 0 to exit)");
         System.out.println("1) Number Bet");
         System.out.println("2) Color Bet");

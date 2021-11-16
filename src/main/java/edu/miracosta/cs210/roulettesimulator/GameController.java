@@ -9,19 +9,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GameController {
+    Text text = Text.getInstance();
     Stage window = App.window;
     private Player player = App.player;
     private double balance = player.getBalance();
 
     @FXML Label balanceValue;
 
-    public void updateCashValue(double value) {
-        balanceValue.setText(String.valueOf(value));
+    @FXML
+    protected void onCashOutClick() {
+        updateCashValue(balance);
     }
 
-    @FXML
-    protected void onButtonClick() {
-        updateCashValue(balance);
+    private void updateCashValue(double value) {
+        balanceValue.setText(text.formattedBalance(value));
     }
 
     // Menu bar functions
