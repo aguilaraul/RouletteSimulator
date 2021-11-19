@@ -40,7 +40,7 @@ public class LoginController {
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
             validLogin = true; // @cleanup: doesn't really do anything
             App.player = AccountsManager.loadPlayer(username);
-            app.changeScene("game-view.fxml", "Roulette Simulator");
+            app.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
         }
     }
 }
