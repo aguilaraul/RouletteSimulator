@@ -6,20 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0"
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="480.0" minWidth="640.0"
+            prefHeight="480.0" prefWidth="640.0"
             xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
-        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+        <MenuBar BorderPane.alignment="CENTER">
             <Menu text="Game">
                 <MenuItem text="Exit" onAction="#onCloseMenuClick" />
             </Menu>
-            <Menu mnemonicParsing="false" text="Player">
-                <MenuItem mnemonicParsing="false" onAction="#onStatsMenuClick" text="Stats" />
-            <MenuItem mnemonicParsing="false" text="Logout" />
+            <Menu text="Player">
+                <MenuItem text="Stats" onAction="#onStatsMenuClick" />
+            <MenuItem text="Logout" />
             </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-                <MenuItem mnemonicParsing="false" text="About" />
+            <Menu text="Help">
+                <MenuItem text="About" />
             </Menu>
         </MenuBar>
     </top>
@@ -31,7 +33,7 @@
                   <Font name="Courier New" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="balanceValue" text="\$1,528.87" textFill="WHITE">
+            <Label fx:id="cashValue" text="\$1,528.87" textFill="WHITE">
                <font>
                   <Font name="Courier New" size="16.0" />
                </font>
@@ -53,7 +55,7 @@
              </ImageView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button text="Bet" fx:id="betButton" textFill="WHITE">
+                  <Button text="Bet" fx:id="betButton" id="gameButton" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
@@ -63,7 +65,7 @@
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding></Button>
-                  <Button style="-fx-background-color: #586855; -fx-border-color: #f0f6f1; -fx-border-radius: 5; -fx-background-radius: 5;" onAction="#onCashOutClick" text="Cash Out" fx:id="cashOutButton" textFill="WHITE">
+                  <Button onAction="#onCashOutClick" text="Cash Out" id="gameButton" fx:id="cashOutButton" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>

@@ -2,8 +2,6 @@ package edu.miracosta.cs210.roulettesimulator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,7 +12,7 @@ public class GameController {
     private Player player = App.player;
     private double balance = player.getBalance();
 
-    @FXML Label balanceValue;
+    @FXML Label cashValue;
 
     @FXML
     protected void onCashOutClick() {
@@ -22,7 +20,7 @@ public class GameController {
     }
 
     private void updateCashValue(double value) {
-        balanceValue.setText(text.formattedBalance(value));
+        cashValue.setText(text.formattedBalance(value));
     }
 
     // Menu bar functions
