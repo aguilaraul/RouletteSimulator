@@ -1,0 +1,41 @@
+.root {
+    -fx-background-color: #5A9F64FF;
+    -fx-font-family: "Courier New";
+}
+
+/* Menu Bar */
+.menu-bar {
+    -fx-background-color: #E0E5DA;
+    -fx-opacity: 0.8;
+}
+
+.menu {
+    -fx-background-color: #E0E5DA;
+}
+
+.menu .context-menu {
+    -fx-background-color: #E0E5DA;
+}
+
+.menu-item {
+    -fx-background-color: #E0E5DA;
+}
+
+.menu-item:hover {
+    -fx-background-color: #41413F;
+}
+
+#gameButton {
+    -fx-background-color: #586855;
+    -fx-border-color: #F0F6F1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+#gameButton:hover {
+    -fx-background-color: #4E4F43;
+}
+
+#gameButton:pressed {
+    -fx-background-color: #4E4F43;
+}

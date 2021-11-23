@@ -38,7 +38,7 @@ public class LoginController {
             passwordField.setPromptText("Enter a password");
         }
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
-            validLogin = true; // @cleanup: doesn't really do anything
+            validLogin = true; // doesn't really do anything yet
             App.player = AccountsManager.loadPlayer(username);
             app.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
         }
