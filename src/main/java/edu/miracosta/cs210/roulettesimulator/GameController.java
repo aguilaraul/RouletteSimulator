@@ -34,4 +34,9 @@ public class GameController {
     protected void onStatsMenuClick() throws IOException {
         StatsWindow.display();
     }
+
+    @FXML
+    protected void onBetClick() throws IOException {
+        App.changeScene("Spin Wheel", "roulette-view.fxml", "css/game.css");
+    }
 }

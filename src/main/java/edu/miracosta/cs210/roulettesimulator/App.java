@@ -24,17 +24,17 @@ public class App extends Application {
         window.show();
     }
 
-    public void changeScene(String title, String fxml) throws IOException {
-        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource(fxml)));
+    static public void changeScene(String title, String fxml) throws IOException {
+        Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
         window.setScene(newScene);
         window.setMinWidth(640.0);
         window.setMinHeight(480.0);
         window.setTitle(title);
     }
-    public void changeScene(String title, String fxml, String stylesheet) throws IOException {
-        Scene newScene = new Scene(FXMLLoader.load(getClass().getResource(fxml)));
+    static public void changeScene(String title, String fxml, String stylesheet) throws IOException {
+        Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
         window.setScene(newScene);
-        newScene.getStylesheets().add(getClass().getResource(stylesheet).toExternalForm());
+        newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
         window.setMinWidth(640.0);
         window.setMinHeight(480.0);
         window.setTitle(title);

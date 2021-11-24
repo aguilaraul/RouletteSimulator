@@ -51,7 +51,7 @@
              </ImageView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button id="gameButton" fx:id="betButton" text="Bet" textFill="WHITE">
+                  <Button id="gameButton" fx:id="betButton" onAction="#onBetClick" text="Bet" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>

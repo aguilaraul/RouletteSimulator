@@ -6,18 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="480.0" minWidth="640.0"
-            prefHeight="480.0" prefWidth="640.0"
-            xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="480.0" minWidth="640.0" prefHeight="480.0" prefWidth="640.0" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <Menu text="Game">
-                <MenuItem text="Exit" onAction="#onCloseMenuClick" />
+                <MenuItem onAction="#onCloseMenuClick" text="Exit" />
             </Menu>
             <Menu text="Player">
-                <MenuItem text="Stats" onAction="#onStatsMenuClick" />
+                <MenuItem onAction="#onStatsMenuClick" text="Stats" />
             <MenuItem text="Logout" />
             </Menu>
             <Menu text="Help">
@@ -55,7 +51,7 @@
              </ImageView>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button text="Bet" fx:id="betButton" id="gameButton" textFill="WHITE">
+                  <Button id="gameButton" fx:id="betButton" onAction="#onBetClick" text="Bet" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
@@ -65,7 +61,7 @@
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding></Button>
-                  <Button onAction="#onCashOutClick" text="Cash Out" id="gameButton" fx:id="cashOutButton" textFill="WHITE">
+                  <Button id="gameButton" fx:id="cashOutButton" onAction="#onCashOutClick" text="Cash Out" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
