@@ -5,6 +5,7 @@ import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,11 +29,13 @@ public class RouletteWheelControl  extends VBox {
     private static final double ANGLE = 9.72972973f;
     // Sets number of rotations of wheel - must be multiple of 360.
     private static final int SPIN_LENGTH = 1800;
-    // Scene size.
-    //private static final int SIZE = 400;
+
     private Ball ball = new Ball();
     private Wheel wheel = new Wheel();
     private Button buttonSpin = new Button("Spin");
+
+    //The last number that came up
+    private int lastNumber;
 
     public RouletteWheelControl() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("roulette-wheel.fxml"));
@@ -52,7 +55,8 @@ public class RouletteWheelControl  extends VBox {
         Duration d = Duration.seconds(3);
         RotateTransition rt = new RotateTransition(d, ball.getShape());
         rt.setFromAngle(180);
-        rt.setToAngle(SPIN_LENGTH + + getRandomNum(0, 37));//betting.getAngle());
+        this.lastNumber = getRandomNum(0, 37);
+        rt.setToAngle(SPIN_LENGTH + + lastNumber);//betting.getAngle());
         rt.setAxis(Rotate.Z_AXIS);
         rt.setOnFinished((actionEvent-> {
             System.out.println("Finished spinning wheel.");
@@ -78,6 +82,12 @@ public class RouletteWheelControl  extends VBox {
         ball.getShape().setScaleX(0.65);
         ball.getShape().setScaleY(0.65);
         buttonSpin.setOnAction(this::press);
+        Insets insets = new Insets(20, 20, 20, 20);
+        buttonSpin.setPadding(insets);
+        buttonSpin.setLayoutX(150);
+        buttonSpin.setLayoutY(50);
+        buttonSpin.setTranslateX(20);
+        buttonSpin.setTranslateY(100);
         Group graphics = new Group(wheel.getWheel(), ball.getShape(), buttonSpin);
         this.getChildren().add(graphics);;
     }
