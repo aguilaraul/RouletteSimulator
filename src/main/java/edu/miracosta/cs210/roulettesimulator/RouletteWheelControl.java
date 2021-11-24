@@ -35,7 +35,7 @@ public class RouletteWheelControl  extends VBox {
     private Button buttonSpin = new Button("Spin");
 
     //The last number that came up
-    private int lastNumber;
+    private int lastNumber =-1;
 
     public RouletteWheelControl() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("roulette-wheel.fxml"));
@@ -55,19 +55,18 @@ public class RouletteWheelControl  extends VBox {
         Duration d = Duration.seconds(3);
         RotateTransition rt = new RotateTransition(d, ball.getShape());
         rt.setFromAngle(180);
-        this.lastNumber = getRandomNum(0, 37);
-        rt.setToAngle(SPIN_LENGTH + + lastNumber);//betting.getAngle());
+
+        rt.setToAngle(SPIN_LENGTH + + getRandomNum(0,37));//betting.getAngle());
         rt.setAxis(Rotate.Z_AXIS);
         rt.setOnFinished((actionEvent-> {
             System.out.println("Finished spinning wheel.");
+            buttonSpin.setText("" + this.lastNumber);
+
             PauseTransition wait = new PauseTransition(Duration.seconds(2));
             wait.setOnFinished((e) -> {
-                try {
-                    App.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
-                } catch (IOException ioe) {
-                    System.err.println("Unable to change scene");
-                    ioe.printStackTrace();
-                }
+                buttonSpin.setText("Back");
+                buttonSpin.setDisable(false);
+                buttonSpin.setOnAction(this::goBack);
                 wait.stop();
             });
             wait.play();
@@ -94,12 +93,22 @@ public class RouletteWheelControl  extends VBox {
 
 
     private void press(ActionEvent e) {
+        buttonSpin.setDisable(true);
         animate();
+    }
+
+    private void goBack(ActionEvent e) {
+        try {
+            App.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
 
     private int getRandomNum(int min, int max) {
         int number = (int)(Math.random()*(max - min) + min);
+        this.lastNumber = number;
         System.out.println(number);
         return numberToAngle(number);
     }
