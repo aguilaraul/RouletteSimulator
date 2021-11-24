@@ -37,6 +37,8 @@ public class GameController {
 
     @FXML
     protected void onBetClick() throws IOException {
-        App.changeScene("Spin Wheel", "roulette-view.fxml", "css/game.css");
+        //Uncomment to use the old wheel control
+        //App.changeScene("Spin Wheel", "roulette-view.fxml", "css/game.css");
+        App.changeScene("Spin Wheel", "roulette-wheel-view.fxml", "css/game.css");
     }
 }
