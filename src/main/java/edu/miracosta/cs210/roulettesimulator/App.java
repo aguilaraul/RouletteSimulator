@@ -33,8 +33,8 @@ public class App extends Application {
     }
     static public void changeScene(String title, String fxml, String stylesheet) throws IOException {
         Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
-        window.setScene(newScene);
         newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
+        window.setScene(newScene);
         window.setMinWidth(640.0);
         window.setMinHeight(480.0);
         window.setTitle(title);
