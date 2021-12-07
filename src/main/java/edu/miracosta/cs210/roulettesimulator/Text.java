@@ -13,6 +13,8 @@
 
 package edu.miracosta.cs210.roulettesimulator;
 
+import javafx.scene.control.ListView;
+
 import java.text.NumberFormat;
 
 public final class Text {
@@ -52,5 +54,9 @@ public final class Text {
     public void displayEndGame(String name, int balance) {
         System.out.println("Thanks for playing " + name);
         System.out.println("Your ending balance is " + formattedBalance(balance));
+    }
+
+    public void addToLog(ListView log, String message) {
+        log.getItems().add(message);
     }
 }

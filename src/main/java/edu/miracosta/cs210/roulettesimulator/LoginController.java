@@ -29,6 +29,7 @@ public class LoginController {
 
     private void checkLogin() throws IOException {
         App app = new App();
+        AccountsManager accountsManager = AccountsManager.getInstance();
         String username = usernameField.getText();
 
         if(username.isEmpty()) {
@@ -39,7 +40,7 @@ public class LoginController {
         }
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
             validLogin = true; // doesn't really do anything yet
-            App.player = AccountsManager.loadPlayer(username);
+            App.player = accountsManager.loadPlayer(username);
             app.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
         }
     }

@@ -2,6 +2,7 @@ package edu.miracosta.cs210.roulettesimulator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,18 +14,10 @@ public class GameController {
     private double balance = player.getBalance();
     private static int spinCount = 1;
 
+    @FXML ListView<String> log;
     @FXML Label cashValue;
 
-    @FXML
-    protected void onCashOutClick() {
-        updateCashValue(balance);
-    }
-
-    private void updateCashValue(double value) {
-        cashValue.setText(text.formattedBalance(value));
-    }
-
-    // Menu bar functions
+    /* Menu bar functions */
     @FXML
     protected void onCloseMenuClick() {
         System.out.println("Game exiting..");
@@ -34,6 +27,17 @@ public class GameController {
     @FXML
     protected void onStatsMenuClick() throws IOException {
         StatsWindow.display();
+    }
+
+    /* Game Buttons */
+    @FXML
+    protected void onCashOutClick() {
+        updateCashValue(balance);
+        log.getItems().add("Cash out " + text.formattedBalance(balance));
+    }
+
+    private void updateCashValue(double value) {
+        cashValue.setText(text.formattedBalance(value));
     }
 
     @FXML

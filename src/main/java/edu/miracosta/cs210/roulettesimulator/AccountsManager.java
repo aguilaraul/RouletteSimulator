@@ -1,29 +1,30 @@
-package edu.miracosta.cs210.roulettesimulator; /**
- * @Authors:  Robert Edmonston, Raul Aguilar, Austin Garrison
- * @Date:     October 10, 2021
- * FA21 CS 210 5198 Final Project
- * Roulette Simulator Application (RSA)
- * 
- * Based on code by:
- * Evan Silverthorn (silvee49322@gmail.com)
- * and Robert Edmonston ( bedmonston@icloud.com)
- *
- * AccountsManager.java
- */
-
+package edu.miracosta.cs210.roulettesimulator;
 import java.io.File;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-class AccountsManager {
+public final class AccountsManager {
 
-  public AccountsManager() {
-    
+  /**
+   * Private constructor so no one can instantiate the class
+   */
+  private AccountsManager() {
   }
 
-  public static void savePlayer(String name, int balance) {
+  /**
+   * Static to class instance of the class
+   */
+  private static final AccountsManager INSTANCE = new AccountsManager();
+
+  /**
+   * To be called by user to obtain instance of class
+   * @return instance of the singleton
+   */
+  public static AccountsManager getInstance() { return INSTANCE; }
+
+  public void savePlayer(String name, int balance) {
     String filename = name.toLowerCase() + ".txt";
     try {
       PrintWriter pw = new PrintWriter(filename);
@@ -35,12 +36,11 @@ class AccountsManager {
     }
   }
 
-  public static Player loadPlayer(String name) {
+  public Player loadPlayer(String name) {
     int balance = 1000;
     String filename = name.toLowerCase() + ".txt";
     try {
-      File myObj = new File(filename);
-      Scanner myReader = new Scanner(myObj);
+      Scanner myReader = new Scanner(new File(filename));
       while (myReader.hasNextLine()) {
         System.out.println("Returning user - loading previous account balance...");
         String data = myReader.nextLine();

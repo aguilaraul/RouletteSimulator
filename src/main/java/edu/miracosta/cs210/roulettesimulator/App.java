@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class App extends Application {
+    static final double windowWidth = 1080.0;
+    static final double windowHeight = 720.0;
     static Stage window;
     static Player player;
     static HashMap<String, Scene> scenes = new HashMap<String, Scene>();
@@ -38,13 +40,12 @@ public class App extends Application {
             newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
             scenes.put(key, newScene);
         }
-
-        window.setScene(newScene);
         if (stylesheet!=null) {
             newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
         }
-        window.setMinWidth(640.0);
-        window.setMinHeight(480.0);
+        window.setScene(newScene);
+        window.setMinWidth(windowWidth);
+        window.setMinHeight(windowHeight);
         window.setTitle(title);
     }
 
