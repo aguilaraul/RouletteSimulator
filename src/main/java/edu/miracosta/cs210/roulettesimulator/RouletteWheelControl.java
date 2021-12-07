@@ -60,6 +60,7 @@ public class RouletteWheelControl  extends VBox {
         rt.setAxis(Rotate.Z_AXIS);
         rt.setOnFinished((actionEvent-> {
             System.out.println("Finished spinning wheel.");
+            System.out.println(this.lastNumber);
             buttonSpin.setText("" + this.lastNumber);
 
             PauseTransition wait = new PauseTransition(Duration.seconds(2));
@@ -109,7 +110,6 @@ public class RouletteWheelControl  extends VBox {
     private int getRandomNum(int min, int max) {
         int number = (int)(Math.random()*(max - min) + min);
         this.lastNumber = number;
-        System.out.println(number);
         return numberToAngle(number);
     }
 

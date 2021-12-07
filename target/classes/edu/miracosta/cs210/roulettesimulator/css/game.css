@@ -1,6 +1,6 @@
 .root {
     -fx-background-color: #5A9F64FF;
-    -fx-font-family: "Courier New";
+    -fx-font-family: monospace;
 }
 
 /* Menu Bar */
@@ -25,11 +25,14 @@
     -fx-background-color: #41413F;
 }
 
+/* Game Buttons */
+
 #gameButton {
     -fx-background-color: #586855;
     -fx-border-color: #F0F6F1;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    -fx-font-weight: 600;
 }
 
 #gameButton:hover {
@@ -38,4 +41,16 @@
 
 #gameButton:pressed {
     -fx-background-color: #4E4F43;
+}
+
+/* Betting Interface */
+#wagerLabel {
+    -fx-font-size: 14;
+    -fx-text-fill: yellow;
+}
+
+.text-field {
+    -fx-background-color: #E0E5DA;
+    -fx-highlight-fill: #4E4F43;
+    -fx-highlight-text-fill: #FFFFFF;
 }

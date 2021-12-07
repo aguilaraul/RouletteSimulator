@@ -15,6 +15,7 @@ package edu.miracosta.cs210.roulettesimulator; /**
 import java.util.Scanner;
 
 public class RouletteTable {
+  private final AccountsManager accountsManager = AccountsManager.getInstance();
   private final Text text = Text.getInstance();
   private final Scanner input = new Scanner(System.in);
 
@@ -48,7 +49,7 @@ public class RouletteTable {
 
   public void endGame() {
     System.out.println("ENDING BALANCE:" + this.balance); // #debug
-    AccountsManager.savePlayer(this.name, this.balance);
+    accountsManager.savePlayer(this.name, this.balance);
     text.displayEndGame(this.name, this.balance);
     keepPlaying = false;
     System.exit(0);

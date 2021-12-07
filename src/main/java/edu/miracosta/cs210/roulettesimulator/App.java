@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    static final double windowWidth = 1080.0;
+    static final double windowHeight = 720.0;
     static Stage window;
     static Player player;
 
@@ -27,16 +29,16 @@ public class App extends Application {
     static public void changeScene(String title, String fxml) throws IOException {
         Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
         window.setScene(newScene);
-        window.setMinWidth(640.0);
-        window.setMinHeight(480.0);
+        window.setMinWidth(windowWidth);
+        window.setMinHeight(windowHeight);
         window.setTitle(title);
     }
     static public void changeScene(String title, String fxml, String stylesheet) throws IOException {
         Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
         newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
         window.setScene(newScene);
-        window.setMinWidth(640.0);
-        window.setMinHeight(480.0);
+        window.setMinWidth(windowWidth);
+        window.setMinHeight(windowHeight);
         window.setTitle(title);
     }
 
