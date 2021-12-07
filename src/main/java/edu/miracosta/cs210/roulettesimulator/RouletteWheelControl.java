@@ -38,7 +38,7 @@ public class RouletteWheelControl  extends VBox {
     private int lastNumber =-1;
 
     public RouletteWheelControl() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("roulette-wheel.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("roulette-wheel-control.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
