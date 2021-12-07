@@ -6,12 +6,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class App extends Application {
     static final double windowWidth = 1080.0;
     static final double windowHeight = 720.0;
     static Stage window;
     static Player player;
+    static HashMap<String, Scene> scenes = new HashMap<String, Scene>();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -27,15 +29,20 @@ public class App extends Application {
     }
 
     static public void changeScene(String title, String fxml) throws IOException {
-        Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
-        window.setScene(newScene);
-        window.setMinWidth(windowWidth);
-        window.setMinHeight(windowHeight);
-        window.setTitle(title);
+        changeScene(title, null);
     }
     static public void changeScene(String title, String fxml, String stylesheet) throws IOException {
-        Scene newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
-        newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
+        Scene newScene;
+        String key = title+fxml+stylesheet;
+        if (scenes.containsKey(key)) {
+            newScene = scenes.get(key);
+        } else {
+            newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
+            scenes.put(key, newScene);
+        }
+        if (stylesheet!=null) {
+            newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
+        }
         window.setScene(newScene);
         window.setMinWidth(windowWidth);
         window.setMinHeight(windowHeight);

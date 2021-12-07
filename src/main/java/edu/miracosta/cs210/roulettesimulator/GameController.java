@@ -12,6 +12,7 @@ public class GameController {
     Stage window = App.window;
     private Player player = App.player;
     private double balance = player.getBalance();
+    private static int spinCount = 1;
 
     @FXML ListView<String> log;
     @FXML Label cashValue;
@@ -43,6 +44,6 @@ public class GameController {
     protected void onBetClick() throws IOException {
         //Uncomment to use the old wheel control
         //App.changeScene("Spin Wheel", "roulette-view.fxml", "css/game.css");
-        App.changeScene("Spin Wheel", "roulette-wheel-view.fxml", "css/game.css");
+        App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
     }
 }
