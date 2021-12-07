@@ -62,6 +62,7 @@ public class RouletteWheelControl  extends VBox {
             System.out.println("Finished spinning wheel.");
             System.out.println(this.lastNumber);
             buttonSpin.setText("" + this.lastNumber);
+            App.spinList().add(this.lastNumber);
 
             PauseTransition wait = new PauseTransition(Duration.seconds(2));
             wait.setOnFinished((e) -> {
