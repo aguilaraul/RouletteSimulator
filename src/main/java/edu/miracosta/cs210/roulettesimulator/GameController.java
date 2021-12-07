@@ -1,5 +1,6 @@
 package edu.miracosta.cs210.roulettesimulator;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -41,5 +42,21 @@ public class GameController {
         //Uncomment to use the old wheel control
         //App.changeScene("Spin Wheel", "roulette-view.fxml", "css/game.css");
         App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
+    }
+
+    @FXML
+    public void initialize() {
+        App.spinList().addListener(new ListChangeListener() {
+            @Override
+            public void onChanged(ListChangeListener.Change change) {
+                System.out.println("Game Controller - Detected a change! ");
+                while (change.next()) {
+                    System.out.println("Was added? " + change.wasAdded());
+                    System.out.println("Was removed? " + change.wasRemoved());
+                    System.out.println("Was replaced? " + change.wasReplaced());
+                    System.out.println("Was permutated? " + change.wasPermutated());
+                }
+            }
+        });
     }
 }

@@ -1,17 +1,45 @@
 package edu.miracosta.cs210.roulettesimulator;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class App extends Application {
+    static final double windowWidth = 1080.0;
+    static final double windowHeight = 720.0;
     static Stage window;
     static Player player;
     static HashMap<String, Scene> scenes = new HashMap<String, Scene>();
+    static private ObservableList<Integer> spinList;
+
+
+    public static ObservableList<Integer> spinList() {
+        if (spinList == null) {
+            ArrayList<Integer> spinArray = new ArrayList<Integer>();
+            spinList = FXCollections.observableList(spinArray);
+//            spinList.addListener(new ListChangeListener() {
+//                    @Override
+//                    public void onChanged(ListChangeListener.Change change) {
+//                        System.out.println("Detected a change! ");
+//                        while (change.next()) {
+//                            System.out.println("Was added? " + change.wasAdded());
+//                            System.out.println("Was removed? " + change.wasRemoved());
+//                            System.out.println("Was replaced? " + change.wasReplaced());
+//                            System.out.println("Was permutated? " + change.wasPermutated());
+//                        }
+//                    }
+//            });
+        }
+        return spinList;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -38,13 +66,12 @@ public class App extends Application {
             newScene = new Scene(FXMLLoader.load(App.class.getResource(fxml)));
             scenes.put(key, newScene);
         }
-
-        window.setScene(newScene);
         if (stylesheet!=null) {
             newScene.getStylesheets().add(App.class.getResource(stylesheet).toExternalForm());
         }
-        window.setMinWidth(640.0);
-        window.setMinHeight(480.0);
+        window.setScene(newScene);
+        window.setMinWidth(windowWidth);
+        window.setMinHeight(windowHeight);
         window.setTitle(title);
     }
 
