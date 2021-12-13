@@ -78,17 +78,21 @@ public class RouletteWheelControl  extends VBox {
 
     //UI Stuff
     public void showWheel() {
-        wheel.getWheel().setScaleX(0.65);
-        wheel.getWheel().setScaleY(0.65);
-        ball.getShape().setScaleX(0.65);
-        ball.getShape().setScaleY(0.65);
+        wheel.getWheel().setScaleX(0.85);
+        wheel.getWheel().setScaleY(0.85);
+        ball.getShape().setScaleX(0.85);
+        ball.getShape().setScaleY(0.85);
         buttonSpin.setOnAction(this::press);
         Insets insets = new Insets(20, 20, 20, 20);
         buttonSpin.setPadding(insets);
-        buttonSpin.setLayoutX(150);
-        buttonSpin.setLayoutY(50);
-        buttonSpin.setTranslateX(20);
-        buttonSpin.setTranslateY(100);
+        buttonSpin.setLayoutX(100);
+        buttonSpin.setLayoutY(30);
+        buttonSpin.setTranslateX(10);
+        buttonSpin.setTranslateY(50);
+//        buttonSpin.setLayoutX(150);
+//        buttonSpin.setLayoutY(50);
+//        buttonSpin.setTranslateX(20);
+//        buttonSpin.setTranslateY(100);
         Group graphics = new Group(wheel.getWheel(), ball.getShape(), buttonSpin);
         this.getChildren().add(graphics);;
     }

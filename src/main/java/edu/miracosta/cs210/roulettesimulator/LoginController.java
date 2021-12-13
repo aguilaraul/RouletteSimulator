@@ -1,8 +1,6 @@
 package edu.miracosta.cs210.roulettesimulator;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -17,7 +15,7 @@ import java.util.Scanner;
 public class LoginController {
     boolean validLogin = false;
     int totalUsers = 4;
-    String INPUT_FILE = "Users.txt";
+    String INPUT_FILE = "src/main/Users.txt";
 
 
     @FXML

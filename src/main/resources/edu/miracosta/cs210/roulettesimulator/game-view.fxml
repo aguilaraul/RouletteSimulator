@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1080.0" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
@@ -53,7 +55,17 @@
                <children>
                   <Label id="wagerLabel" text="Wager:">
                   </Label>
-                  <TextField promptText="Enter Wager" />
+                  <TextField fx:id="wagerAmount" promptText="Enter Wager" />
+                   <ComboBox fx:id="betSelection" layoutX="15.0" layoutY="33.0" prefWidth="90.0" promptText="Bet">
+                   <items>
+                       <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Black" />
+                           <String fx:value="Red" />
+                           <String fx:value="Odd" />
+                           <String fx:value="Even" />
+                       </FXCollections>
+                   </items>
+               </ComboBox>
                   <Button id="gameButton" fx:id="betButton" onAction="#onBetClick" text="Bet" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
