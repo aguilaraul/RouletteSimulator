@@ -24,7 +24,7 @@ public final class AccountsManager {
    */
   public static AccountsManager getInstance() { return INSTANCE; }
 
-  public void savePlayer(String name, int balance) {
+  public static void savePlayer(String name, int balance) {
     String filename = name.toLowerCase() + ".txt";
     try {
       PrintWriter pw = new PrintWriter(filename);
@@ -36,7 +36,7 @@ public final class AccountsManager {
     }
   }
 
-  public Player loadPlayer(String name) {
+  public static Player loadPlayer(String name) {
     int balance = 1000;
     String filename = name.toLowerCase() + ".txt";
     try {
