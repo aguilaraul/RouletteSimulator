@@ -71,6 +71,13 @@ public class GameController {
                     if (bet!=null) {
                         boolean isWinner = bet.isWinner(num);
                         System.out.println("Bet was a winner? " + isWinner);
+                        String logString = isWinner ? "WINNING BET! New balance : " : "LOSING BET! New Balance : ";
+                        if (isWinner) {
+                            balance+=bet.getWagerAmount();
+                        } else {
+                            balance-=bet.getWagerAmount();
+                        }
+                        log.getItems().add(logString + text.formattedBalance(balance));
                     }
                 }
             }
@@ -108,6 +115,12 @@ public class GameController {
                             bet.setWagerAmount(wagerAmt);
                             ((OddEvenBet)bet).setIsEven(true);
                             break;
+                        default:
+                            int value = Integer.parseInt(newValue);
+                            bet = new NumberBet();
+                            bet.setWagerAmount(wagerAmt);
+                            ((NumberBet)bet).setNumber(value);
+
                     }
                 }
             }
