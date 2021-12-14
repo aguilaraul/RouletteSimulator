@@ -29,7 +29,7 @@
                   <Font name="Courier New" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="cashValue" text="\$1,528.87" textFill="WHITE">
+            <Label fx:id="playerBalanceLabel" text="\$1,528.87" textFill="WHITE">
                <font>
                   <Font name="Courier New" size="16.0" />
                </font>

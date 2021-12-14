@@ -24,7 +24,7 @@ public final class AccountsManager {
    */
   public static AccountsManager getInstance() { return INSTANCE; }
 
-  public static void savePlayer(String name, int balance) {
+  public static void savePlayer(String name, double balance) {
     String filename = name.toLowerCase() + ".txt";
     try {
       PrintWriter pw = new PrintWriter(filename);
@@ -37,14 +37,14 @@ public final class AccountsManager {
   }
 
   public static Player loadPlayer(String name) {
-    int balance = 1000;
+    double balance = 1000.0;
     String filename = name.toLowerCase() + ".txt";
     try {
       Scanner myReader = new Scanner(new File(filename));
       while (myReader.hasNextLine()) {
         System.out.println("Returning user - loading previous account balance...");
         String data = myReader.nextLine();
-        balance = Integer.parseInt(data);
+        balance = Double.parseDouble(data);
         System.out.println("You're balance is: $" + balance);
       }
       myReader.close();

@@ -15,17 +15,17 @@ public class GameController {
     private Player player = App.player;
     private double balance = player.getBalance();
     private double wager;
+    private Bet betType;
     private static int spinCount = 1;
 
     @FXML TextField wagerTextField;
     @FXML ListView<String> log;
-    @FXML Label cashValue;
+    @FXML Label playerBalanceLabel;
 
     /* Menu bar functions */
     @FXML
     protected void onCloseMenuClick() {
-        System.out.println("Game exiting..");
-        window.close();
+        App.exitProgram();
     }
 
     @FXML
@@ -36,18 +36,30 @@ public class GameController {
     /* Bet Buttons */
     @FXML
     protected void onRedBetClick() {
+        ColorBet redBet = new ColorBet();
+        redBet.setColor(Color.RED);
+        betType = redBet;
         log.getItems().add("Placed bet on RED");
     }
     @FXML
     protected void onBlackBetClick() {
+        ColorBet blackBet = new ColorBet();
+        blackBet.setColor(Color.BLACK);
+        betType = blackBet;
         log.getItems().add("Placed bet on BLACK");
     }
     @FXML
     protected void onOddBetClick() {
+        OddEvenBet oebet = new OddEvenBet();
+        oebet.setIsEven(false);
+        betType = oebet;
         log.getItems().add("Placed bet on ODD");
     }
     @FXML
     protected void onEvenBetClick() {
+        OddEvenBet oebet = new OddEvenBet();
+        oebet.setIsEven(true);
+        betType = oebet;
         log.getItems().add("Placed bet on EVEN");
     }
 
@@ -59,22 +71,46 @@ public class GameController {
     }
 
     private void updateCashValue(double value) {
-        cashValue.setText(text.formattedBalance(value));
+        playerBalanceLabel.setText(text.formattedBalance(value));
     }
 
     @FXML
     protected void onBetClick() throws IOException {
-        getWagerAmount();
-        log.getItems().add("You bet " + text.formattedBalance(this.wager));
-        App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
+        checkBet();
     }
 
-    private void getWagerAmount() {
-        this.wager = Integer.parseInt(wagerTextField.getText());
+    /**
+     * Checks if valid bet was placed
+     * @throws IOException unable to change scene
+     */
+    private void checkBet() throws IOException {
+        if(checkWager()) {
+            log.getItems().add("You bet " + text.formattedBalance(this.wager));
+            App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
+        }
+    }
+
+    private boolean checkWager() {
+        boolean validWager = false;
+        if (wagerTextField.getText().isBlank() || wagerTextField.getText().equals("0")) {
+            log.getItems().add("Enter a wager amount");
+        } else {
+            try {
+                this.wager = Double.parseDouble(wagerTextField.getText());
+                if(wager > this.balance) {
+                    log.getItems().add("Your wager is greater than your balance");
+                }
+                validWager = wager > 0 && wager <= this.balance;
+            } catch (NumberFormatException invalidWager) {
+                log.getItems().add("Please enter a valid wager");
+            }
+        }
+        return validWager;
     }
 
     @FXML
     public void initialize() {
+        playerBalanceLabel.setText(text.formattedBalance(balance));
         App.spinList().addListener(new ListChangeListener() {
             @Override
             public void onChanged(ListChangeListener.Change change) {

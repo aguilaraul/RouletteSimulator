@@ -2,7 +2,6 @@ package edu.miracosta.cs210.roulettesimulator;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,6 +33,10 @@ public class App extends Application {
         window = primaryStage;
         window.setResizable(false);
         window.setTitle("Login");
+        window.setOnCloseRequest(windowEvent -> {
+            windowEvent.consume();
+            exitProgram();
+        });
 
         FXMLLoader loginSceneLoader = new FXMLLoader(App.class.getResource("login-view.fxml"));
         Scene loginScene = new Scene(loginSceneLoader.load(), 250, 250);
@@ -61,6 +64,15 @@ public class App extends Application {
         window.setMinWidth(windowWidth);
         window.setMinHeight(windowHeight);
         window.setTitle(title);
+    }
+
+    public static void exitProgram() {
+        if(ExitConfirmBox.display()) {
+            System.out.println("Saving player..");
+            AccountsManager.savePlayer(App.player.getName(), App.player.getBalance());
+            System.out.println("Exiting..");
+            window.close();
+        }
     }
 
     public static void main(String[] args) {
