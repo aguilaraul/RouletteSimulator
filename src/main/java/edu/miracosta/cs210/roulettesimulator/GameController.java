@@ -19,7 +19,7 @@ public class GameController {
 
     @FXML TextField wagerTextField;
     @FXML ListView<String> log;
-    @FXML Label cashValue;
+    @FXML Label playerBalanceLabel;
 
     /* Menu bar functions */
     @FXML
@@ -58,7 +58,7 @@ public class GameController {
     }
 
     private void updateCashValue(double value) {
-        cashValue.setText(text.formattedBalance(value));
+        playerBalanceLabel.setText(text.formattedBalance(value));
     }
 
     @FXML
@@ -88,7 +88,7 @@ public class GameController {
                     log.getItems().add("Your wager is greater than your balance");
                 }
                 validWager = wager > 0 && wager <= this.balance;
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException invalidWager) {
                 log.getItems().add("Please enter a valid wager");
             }
         }
@@ -97,6 +97,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        playerBalanceLabel.setText(text.formattedBalance(balance));
         App.spinList().addListener(new ListChangeListener() {
             @Override
             public void onChanged(ListChangeListener.Change change) {
