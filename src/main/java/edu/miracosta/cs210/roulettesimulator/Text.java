@@ -13,11 +13,16 @@
 
 package edu.miracosta.cs210.roulettesimulator;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 import java.text.NumberFormat;
 
 public final class Text {
+
+    private int winningNumber;
+    private ObservableList<String> log = FXCollections.observableArrayList();
 
     /**
      * Private constructor so nobody can instantiate the class.
@@ -56,7 +61,20 @@ public final class Text {
         System.out.println("Your ending balance is " + formattedBalance(balance));
     }
 
-    public void addToLog(ListView log, String message) {
-        log.getItems().add(message);
+    // RouletteWheelControl
+    public void setWinningNumber(int n) {
+        winningNumber = n;
+    }
+
+    public int getWinningNumber() {
+        return winningNumber;
+    }
+
+    public String winningNumber(int n) {
+        return "The winning number was" + n;
+    }
+
+    public void addToLog(String message) {
+        this.log.add(message);
     }
 }

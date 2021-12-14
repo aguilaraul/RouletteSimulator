@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 
 public class LoginController {
-    boolean validLogin = false;
+    boolean validLogin = true;
     int totalUsers = 4;
     String INPUT_FILE = "Users.txt";
 
@@ -46,44 +46,44 @@ public class LoginController {
             passwordField.setPromptText("Enter a password");
         }
 
-        if(!username.isEmpty() && !passwordField.getText().isBlank()) {
-            App.player = accountsManager.loadPlayer(username);
+//        if(!username.isEmpty() && !passwordField.getText().isBlank()) {
+//            App.player = accountsManager.loadPlayer(username);
+//
+//            try {
+//                Scanner file = new Scanner (new File(INPUT_FILE));
+//                String userTxt, passwordTxt, line;
+//                String[] data;
+//                int count = 0;
+//
+//                while(file.hasNextLine())
+//                {
+//                    line = file.nextLine();
+//                    data = line.split(",");
+//
+//                    userTxt = data[0];
+//                    passwordTxt = data[1];
+//
+//                    if (userTxt.equals(username) && passwordTxt.equals(passwordField.getText())){
+//                        //System.out.println("login successful");
+//                        validLogin = true;
+//                    }
+//                    else {
+//                        count++;
+//                    }
+//
+//                    if (count == totalUsers) {
+//                        //System.out.println("login failed");
+//                        validLogin = false;
+//                    }
+//                }
+//            }
+//            catch (FileNotFoundException e)
+//            {
+//                System.out.println("Error loading: " + e.getMessage());
+//            }
+//        }
 
-            try {
-                Scanner file = new Scanner (new File(INPUT_FILE));
-                String userTxt, passwordTxt, line;
-                String[] data;
-                int count = 0;
-
-                while(file.hasNextLine())
-                {
-                    line = file.nextLine();
-                    data = line.split(",");
-
-                    userTxt = data[0];
-                    passwordTxt = data[1];
-
-                    if (userTxt.equals(username) && passwordTxt.equals(passwordField.getText())){
-                        //System.out.println("login successful");
-                        validLogin = true;
-                    }
-                    else {
-                        count++;
-                    }
-
-                    if (count == totalUsers) {
-                        //System.out.println("login failed");
-                        validLogin = false;
-                    }
-                }
-            }
-            catch (FileNotFoundException e)
-            {
-                System.out.println("Error loading: " + e.getMessage());
-            }
-        }
-
-        if(!username.isEmpty() && !passwordField.getText().isBlank() && validLogin == true) {
+        if(!username.isEmpty() && !passwordField.getText().isBlank() && validLogin) {
             //validLogin = true; // doesn't really do anything yet
             App.player = AccountsManager.loadPlayer(username);
             app.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");

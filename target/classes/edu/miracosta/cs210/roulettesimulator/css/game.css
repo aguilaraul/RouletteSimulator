@@ -32,6 +32,8 @@
     -fx-border-color: #F0F6F1;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
+    -fx-font-family: monospace;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: 600;
 }
 
@@ -40,6 +42,10 @@
 }
 
 #gameButton:pressed {
+    -fx-background-color: #4E4F43;
+}
+
+#gameButton:focused {
     -fx-background-color: #4E4F43;
 }
 

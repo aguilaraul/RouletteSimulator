@@ -7,35 +7,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Translate;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class RouletteWheelControl  extends VBox {
 
+    //The last number that came up
+    public static int winningNumber =-1;
     // Number of steps in one orbit of roulette wheel.
     private static final double ANGLE = 9.72972973f;
     // Sets number of rotations of wheel - must be multiple of 360.
     private static final int SPIN_LENGTH = 1800;
 
+    private Text text = Text.getInstance();
     private Ball ball = new Ball();
     private Wheel wheel = new Wheel();
     private Button buttonSpin = new Button("Spin");
 
-    //The last number that came up
-    private int lastNumber =-1;
+
 
     public RouletteWheelControl() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("roulette-wheel-control.fxml"));
@@ -56,13 +49,14 @@ public class RouletteWheelControl  extends VBox {
         RotateTransition rt = new RotateTransition(d, ball.getShape());
         rt.setFromAngle(180);
 
-        rt.setToAngle(SPIN_LENGTH + + getRandomNum(0,37));//betting.getAngle());
+        rt.setToAngle(SPIN_LENGTH + getRandomNum(0,37));//betting.getAngle());
         rt.setAxis(Rotate.Z_AXIS);
         rt.setOnFinished((actionEvent-> {
             System.out.println("Finished spinning wheel.");
-            System.out.println(this.lastNumber);
-            buttonSpin.setText("" + this.lastNumber);
-            App.spinList().add(this.lastNumber);
+            System.out.println(winningNumber);
+            buttonSpin.setText("" + winningNumber);
+            text.addToLog(text.winningNumber(winningNumber));
+            App.spinList().add(winningNumber);
 
             PauseTransition wait = new PauseTransition(Duration.seconds(2));
             wait.setOnFinished((e) -> {
@@ -110,7 +104,7 @@ public class RouletteWheelControl  extends VBox {
 
     private int getRandomNum(int min, int max) {
         int number = (int)(Math.random()*(max - min) + min);
-        this.lastNumber = number;
+        winningNumber = number;
         return numberToAngle(number);
     }
 
