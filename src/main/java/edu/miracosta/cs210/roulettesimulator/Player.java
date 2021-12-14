@@ -21,7 +21,7 @@ public class Player {
     this.balance = 1000;
   }
 
-  public Player(String aName, int aBalance) {
+  public Player(String aName, double aBalance) {
     name = aName;
     balance = aBalance;
   }

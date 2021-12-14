@@ -2,6 +2,17 @@
     -fx-background-color: #5F9C65;
 }
 
+.text-field {
+    -fx-background-color: #E0E5DA;
+    -fx-highlight-fill: #4E4F43;
+    -fx-highlight-text-fill: #FFFFFF;
+}
+
+.text-field:focused {
+    -fx-border-color: #4E4F43;
+    -fx-border-radius: 3px;
+}
+
 #loginButton {
     -fx-background-color: #E0E5DA;
 }

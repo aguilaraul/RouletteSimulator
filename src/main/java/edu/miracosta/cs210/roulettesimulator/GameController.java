@@ -24,8 +24,7 @@ public class GameController {
     /* Menu bar functions */
     @FXML
     protected void onCloseMenuClick() {
-        System.out.println("Game exiting..");
-        window.close();
+        App.exitProgram();
     }
 
     @FXML
@@ -70,7 +69,11 @@ public class GameController {
     }
 
     private void getWagerAmount() {
-        this.wager = Integer.parseInt(wagerTextField.getText());
+        try {
+            this.wager = Integer.parseInt(wagerTextField.getText());
+        } catch (NumberFormatException e) {
+            log.getItems().add("Please enter a wager amount");
+        }
     }
 
     @FXML
