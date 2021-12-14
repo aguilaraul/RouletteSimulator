@@ -22,6 +22,6 @@ public class OddEvenBet extends Bet
   }
 
   boolean isWinner(int winningNumber) {
-    return (winningNumber % 2 == 0) ? isEven : !isEven;
+    return (winningNumber % 2 == 0) == isEven;
   }
 }

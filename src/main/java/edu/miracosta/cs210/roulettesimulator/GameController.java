@@ -15,6 +15,7 @@ public class GameController {
     private Player player = App.player;
     private double balance = player.getBalance();
     private double wager;
+    private Bet betType;
     private static int spinCount = 1;
 
     @FXML TextField wagerTextField;
@@ -35,18 +36,30 @@ public class GameController {
     /* Bet Buttons */
     @FXML
     protected void onRedBetClick() {
+        ColorBet redBet = new ColorBet();
+        redBet.setColor(Color.RED);
+        betType = redBet;
         log.getItems().add("Placed bet on RED");
     }
     @FXML
     protected void onBlackBetClick() {
+        ColorBet blackBet = new ColorBet();
+        blackBet.setColor(Color.BLACK);
+        betType = blackBet;
         log.getItems().add("Placed bet on BLACK");
     }
     @FXML
     protected void onOddBetClick() {
+        OddEvenBet oebet = new OddEvenBet();
+        oebet.setIsEven(false);
+        betType = oebet;
         log.getItems().add("Placed bet on ODD");
     }
     @FXML
     protected void onEvenBetClick() {
+        OddEvenBet oebet = new OddEvenBet();
+        oebet.setIsEven(true);
+        betType = oebet;
         log.getItems().add("Placed bet on EVEN");
     }
 
