@@ -20,6 +20,7 @@ public class GameController {
     private static int spinCount = 1;
 
     Bet bet;
+    String betTypeSelection;
 
     @FXML ListView<String> log;
     @FXML Label cashValue;
@@ -54,6 +55,11 @@ public class GameController {
 
     @FXML
     protected void onBetClick() throws IOException {
+        if (betTypeSelection==null || wagerAmount.getText()==null) {
+            System.out.println("No bet type selected or wager amount is empty");
+            return;
+        }
+        createWager();
         App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
     }
 
@@ -76,7 +82,6 @@ public class GameController {
                         String logString = isWinner ? "WINNING BET! New balance : " : "LOSING BET! New Balance : ";
                         if (isWinner) {
                             balance+=bet.getWagerAmount();
-
                         } else {
                             balance-=bet.getWagerAmount();
                         }
@@ -92,44 +97,86 @@ public class GameController {
         betSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override public void changed(ObservableValue<? extends String> selected, String oldValue, String newValue) {
                 if (newValue != null) {
-                    String wagerString = wagerAmount.getText();
-                    if (wagerString==null) {
-                        System.out.println("No wager amount");
-                        return;
-                    }
-                    System.out.println("Wager amount : " + wagerString);
-                    Integer wagerAmt = Integer.parseInt(wagerString);
-                    System.out.println("Bet selected " + selected);
-                    switch(newValue) {
-                        case "Black":
-                            bet = new ColorBet();
-                            bet.setWagerAmount(wagerAmt);
-                            ((ColorBet)bet).setColor(Color.BLACK);
-                            break;
-                        case "Red":
-                            bet = new ColorBet();
-                            bet.setWagerAmount(wagerAmt);
-                            ((ColorBet)bet).setColor(Color.RED);
-                            break;
-                        case "Odd":
-                            bet = new OddEvenBet();
-                            bet.setWagerAmount(wagerAmt);
-                            ((OddEvenBet)bet).setIsEven(false);
-                            break;
-                        case "Even":
-                            bet = new OddEvenBet();
-                            bet.setWagerAmount(wagerAmt);
-                            ((OddEvenBet)bet).setIsEven(true);
-                            break;
-                        default:
-                            int value = Integer.parseInt(newValue);
-                            bet = new NumberBet();
-                            bet.setWagerAmount(wagerAmt);
-                            ((NumberBet)bet).setNumber(value);
-
-                    }
+                    betTypeSelection = newValue;
                 }
+//                    String wagerString = wagerAmount.getText();
+//                    if (wagerString==null) {
+//                        System.out.println("No wager amount");
+//                        return;
+//                    }
+//                    System.out.println("Wager amount : " + wagerString);
+//                    Integer wagerAmt = Integer.parseInt(wagerString);
+//                    System.out.println("Bet selected " + selected);
+//                    switch(newValue) {
+//                        case "Black":
+//                            bet = new ColorBet();
+//                            bet.setWagerAmount(wagerAmt);
+//                            ((ColorBet)bet).setColor(Color.BLACK);
+//                            break;
+//                        case "Red":
+//                            bet = new ColorBet();
+//                            bet.setWagerAmount(wagerAmt);
+//                            ((ColorBet)bet).setColor(Color.RED);
+//                            break;
+//                        case "Odd":
+//                            bet = new OddEvenBet();
+//                            bet.setWagerAmount(wagerAmt);
+//                            ((OddEvenBet)bet).setIsEven(false);
+//                            break;
+//                        case "Even":
+//                            bet = new OddEvenBet();
+//                            bet.setWagerAmount(wagerAmt);
+//                            ((OddEvenBet)bet).setIsEven(true);
+//                            break;
+//                        default:
+//                            int value = Integer.parseInt(newValue);
+//                            bet = new NumberBet();
+//                            bet.setWagerAmount(wagerAmt);
+//                            ((NumberBet)bet).setNumber(value);
+//
+//                    }
+//                }
             }
         });
+    }
+
+    public void createWager() {
+        String newValue = betTypeSelection;
+        String wagerString = wagerAmount.getText();
+        if (wagerString==null) {
+            System.out.println("No wager amount");
+            return;
+        }
+        System.out.println("Wager amount : " + wagerString);
+        Integer wagerAmt = Integer.parseInt(wagerString);
+        System.out.println("Bet selected " + betTypeSelection);
+        switch(newValue) {
+            case "Black":
+                bet = new ColorBet();
+                bet.setWagerAmount(wagerAmt);
+                ((ColorBet)bet).setColor(Color.BLACK);
+                break;
+            case "Red":
+                bet = new ColorBet();
+                bet.setWagerAmount(wagerAmt);
+                ((ColorBet)bet).setColor(Color.RED);
+                break;
+            case "Odd":
+                bet = new OddEvenBet();
+                bet.setWagerAmount(wagerAmt);
+                ((OddEvenBet)bet).setIsEven(false);
+                break;
+            case "Even":
+                bet = new OddEvenBet();
+                bet.setWagerAmount(wagerAmt);
+                ((OddEvenBet)bet).setIsEven(true);
+                break;
+            default:
+                int value = Integer.parseInt(newValue);
+                bet = new NumberBet();
+                bet.setWagerAmount(wagerAmt);
+                ((NumberBet)bet).setNumber(value);
+
+        }
     }
 }
