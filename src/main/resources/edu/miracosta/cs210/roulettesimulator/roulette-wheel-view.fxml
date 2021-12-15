@@ -15,5 +15,6 @@
     </padding>
     <HBox>
         <RouletteWheelControl fx:id="rouletteWheelControl" />
+        <Label fx:id="resultsLabel" />
     </HBox>
 </VBox>
