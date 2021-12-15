@@ -48,6 +48,7 @@ public class GameController {
     }
 
     private void updateCashValue(double value) {
+
         cashValue.setText(text.formattedBalance(value));
     }
 
@@ -58,6 +59,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        updateCashValue(App.player.getBalance());
         App.spinList().addListener(new ListChangeListener() {
             @Override
             public void onChanged(ListChangeListener.Change change) {
@@ -74,9 +76,13 @@ public class GameController {
                         String logString = isWinner ? "WINNING BET! New balance : " : "LOSING BET! New Balance : ";
                         if (isWinner) {
                             balance+=bet.getWagerAmount();
+
                         } else {
                             balance-=bet.getWagerAmount();
                         }
+                        App.player.setBalance((int)balance);
+                        updateCashValue(App.player.getBalance());
+                        AccountsManager.savePlayer(App.player.getName(), (int)balance);
                         log.getItems().add(logString + text.formattedBalance(balance));
                     }
                 }

@@ -64,6 +64,8 @@ public class LoginController {
                     if (userTxt.equals(username) && passwordTxt.equals(passwordField.getText())){
                         //System.out.println("login successful");
                         validLogin = true;
+                        Player player = AccountsManager.loadPlayer(username);
+                        App.player = player;
                     }
                     else {
                         count++;
