@@ -18,6 +18,7 @@ public class App extends Application {
     static Player player;
     static HashMap<String, Scene> scenes = new HashMap<String, Scene>();
     static private ObservableList<Integer> spinList;
+    static Bet bet;
 
 
     public static ObservableList<Integer> spinList() {

@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1080.0" stylesheets="@css/game.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.miracosta.cs210.roulettesimulator.GameController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
@@ -14,92 +16,113 @@
             </Menu>
             <Menu text="Player">
                 <MenuItem onAction="#onStatsMenuClick" text="Stats" />
-            <MenuItem text="Logout" />
+                <MenuItem text="Logout" />
             </Menu>
             <Menu text="Help">
                 <MenuItem text="About" />
             </Menu>
         </MenuBar>
     </top>
-   <bottom>
-      <HBox style="-fx-background-color: #41413f;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="CASH" textFill="YELLOW">
-               <font>
-                  <Font name="Courier New" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="playerBalanceLabel" text="\$1,528.87" textFill="WHITE">
-               <font>
-                  <Font name="Courier New" size="16.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
-   </bottom>
-   <center>
-      <VBox alignment="CENTER" prefWidth="1080.0" BorderPane.alignment="CENTER">
-         <children>
-             <ImageView cache="true" fitHeight="400.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" translateY="-50.0">
-                 <Image backgroundLoading="true" url="@board.png" />
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-             </ImageView>
-            <HBox>
-               <children>
-                  <Label id="wagerLabel" text="Wager:">
-                  </Label>
-                  <TextField fx:id="wagerTextField" promptText="Enter Wager" />
-                  <GridPane prefHeight="155.0" prefWidth="200.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="113.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="87.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button id="gameButton" fx:id="redBetButton" mnemonicParsing="false" onAction="#onRedBetClick" text="RED">
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin></Button>
-                        <Button id="gameButton" fx:id="blackBetButton" mnemonicParsing="false" onAction="#onBlackBetClick" text="BLACK" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin></Button>
-                        <Button id="gameButton" fx:id="oddBetButton" mnemonicParsing="false" onAction="#onOddBetClick" text="ODD" GridPane.rowIndex="1" />
-                        <Button id="gameButton" fx:id="evenBetButton" mnemonicParsing="false" onAction="#onEvenBetClick" text="EVEN" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label id="wagerLabel" prefHeight="16.0" prefWidth="128.0" text="Enter Number:" GridPane.rowIndex="2" />
-                        <TextField prefHeight="23.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     </children>
-                  </GridPane>
-                  <Button id="gameButton" fx:id="betButton" onAction="#onBetClick" text="Bet" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding></Button>
-                  <Button id="gameButton" fx:id="cashOutButton" onAction="#onCashOutClick" text="Cash Out" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding></Button>
-                  <ListView fx:id="log" prefHeight="155.0" prefWidth="480.0" />
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
+    <bottom>
+        <HBox style="-fx-background-color: #41413f;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="CASH" textFill="YELLOW">
+                    <font>
+                        <Font name="Courier New" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="cashValue" text="\$1,528.87" textFill="WHITE">
+                    <font>
+                        <Font name="Courier New" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" prefWidth="1080.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView cache="true" fitHeight="400.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" translateY="-50.0">
+                    <Image backgroundLoading="true" url="@board.png" />
+                    <viewport>
+                        <Rectangle2D />
+                    </viewport>
+                </ImageView>
+                <HBox>
+                    <children>
+                        <Label id="wagerLabel" text="Wager:">
+                        </Label>
+                        <TextField fx:id="wagerAmount" promptText="Enter Wager" />
+                        <ComboBox fx:id="betSelection" layoutX="15.0" layoutY="33.0" prefWidth="90.0" promptText="Bet">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Black" />
+                                    <String fx:value="Red" />
+                                    <String fx:value="Odd" />
+                                    <String fx:value="Even" />
+                                    <String fx:value="1" />
+                                    <String fx:value="2" />
+                                    <String fx:value="3" />
+                                    <String fx:value="4" />
+                                    <String fx:value="5" />
+                                    <String fx:value="6" />
+                                    <String fx:value="7" />
+                                    <String fx:value="8" />
+                                    <String fx:value="9" />
+                                    <String fx:value="10" />
+                                    <String fx:value="11" />
+                                    <String fx:value="12" />
+                                    <String fx:value="13" />
+                                    <String fx:value="14" />
+                                    <String fx:value="15" />
+                                    <String fx:value="16" />
+                                    <String fx:value="17" />
+                                    <String fx:value="18" />
+                                    <String fx:value="19" />
+                                    <String fx:value="20" />
+                                    <String fx:value="21" />
+                                    <String fx:value="22" />
+                                    <String fx:value="23" />
+                                    <String fx:value="24" />
+                                    <String fx:value="25" />
+                                    <String fx:value="26" />
+                                    <String fx:value="27" />
+                                    <String fx:value="28" />
+                                    <String fx:value="29" />
+                                    <String fx:value="30" />
+                                    <String fx:value="31" />
+                                    <String fx:value="32" />
+                                    <String fx:value="33" />
+                                    <String fx:value="34" />
+                                    <String fx:value="35" />
+                                    <String fx:value="36" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <Button id="gameButton" fx:id="betButton" onAction="#onBetClick" text="Bet" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                            </padding></Button>
+                        <Button id="gameButton" fx:id="cashOutButton" onAction="#onCashOutClick" text="Cash Out" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </HBox.margin>
+                            <padding>
+                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                            </padding></Button>
+                        <ListView fx:id="log" prefHeight="155.0" prefWidth="480.0" />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
 </BorderPane>

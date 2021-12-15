@@ -1,7 +1,10 @@
 package edu.miracosta.cs210.roulettesimulator;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -14,53 +17,28 @@ public class GameController {
     Stage window = App.window;
     private Player player = App.player;
     private double balance = player.getBalance();
-    private double wager;
-    private Bet betType;
     private static int spinCount = 1;
 
-    @FXML TextField wagerTextField;
+    Bet bet;
+    String betTypeSelection;
+
     @FXML ListView<String> log;
-    @FXML Label playerBalanceLabel;
+    @FXML Label cashValue;
+    @FXML
+    ComboBox betSelection;
+    @FXML
+    TextField wagerAmount;
 
     /* Menu bar functions */
     @FXML
     protected void onCloseMenuClick() {
-        App.exitProgram();
+        System.out.println("Game exiting..");
+        window.close();
     }
 
     @FXML
     protected void onStatsMenuClick() throws IOException {
         StatsWindow.display();
-    }
-
-    /* Bet Buttons */
-    @FXML
-    protected void onRedBetClick() {
-        ColorBet redBet = new ColorBet();
-        redBet.setColor(Color.RED);
-        betType = redBet;
-        log.getItems().add("Placed bet on RED");
-    }
-    @FXML
-    protected void onBlackBetClick() {
-        ColorBet blackBet = new ColorBet();
-        blackBet.setColor(Color.BLACK);
-        betType = blackBet;
-        log.getItems().add("Placed bet on BLACK");
-    }
-    @FXML
-    protected void onOddBetClick() {
-        OddEvenBet oebet = new OddEvenBet();
-        oebet.setIsEven(false);
-        betType = oebet;
-        log.getItems().add("Placed bet on ODD");
-    }
-    @FXML
-    protected void onEvenBetClick() {
-        OddEvenBet oebet = new OddEvenBet();
-        oebet.setIsEven(true);
-        betType = oebet;
-        log.getItems().add("Placed bet on EVEN");
     }
 
     /* Game Buttons */
@@ -71,58 +49,98 @@ public class GameController {
     }
 
     private void updateCashValue(double value) {
-        playerBalanceLabel.setText(text.formattedBalance(value));
+
+        cashValue.setText(text.formattedBalance(value));
     }
 
     @FXML
     protected void onBetClick() throws IOException {
-        checkBet();
-    }
-
-    /**
-     * Checks if valid bet was placed
-     * @throws IOException unable to change scene
-     */
-    private void checkBet() throws IOException {
-        if(checkWager()) {
-            log.getItems().add("You bet " + text.formattedBalance(this.wager));
-            App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
+        if (betTypeSelection==null || wagerAmount.getText()==null) {
+            System.out.println("No bet type selected or wager amount is empty");
+            return;
         }
-    }
-
-    private boolean checkWager() {
-        boolean validWager = false;
-        if (wagerTextField.getText().isBlank() || wagerTextField.getText().equals("0")) {
-            log.getItems().add("Enter a wager amount");
-        } else {
-            try {
-                this.wager = Double.parseDouble(wagerTextField.getText());
-                if(wager > this.balance) {
-                    log.getItems().add("Your wager is greater than your balance");
-                }
-                validWager = wager > 0 && wager <= this.balance;
-            } catch (NumberFormatException invalidWager) {
-                log.getItems().add("Please enter a valid wager");
-            }
-        }
-        return validWager;
+        createWager();
+        App.changeScene("Spin #" + spinCount++, "roulette-wheel-view.fxml", "css/game.css");
     }
 
     @FXML
     public void initialize() {
-        playerBalanceLabel.setText(text.formattedBalance(balance));
+        updateCashValue(App.player.getBalance());
         App.spinList().addListener(new ListChangeListener() {
             @Override
             public void onChanged(ListChangeListener.Change change) {
-                //@Debug
-//                System.out.println("Game Controller - Detected a change! ");
-//                while (change.next()) {
-//                    System.out.println("Was added? " + change.wasAdded());
-//                    System.out.println("Was removed? " + change.wasRemoved());
-//                    System.out.println("Was replaced? " + change.wasReplaced());
-//                    System.out.println("Was permutated? " + change.wasPermutated());
-//                }
+                System.out.println("Game Controller - Detected a change! ");
+                while (change.next()) {
+                    System.out.println("Was added? " + change.wasAdded());
+                    System.out.println("Was removed? " + change.wasRemoved());
+                    System.out.println("Was replaced? " + change.wasReplaced());
+                    System.out.println("Was permutated? " + change.wasPermutated());
+                    Integer num = App.spinList().get(App.spinList().size()-1);
+                    if (bet!=null) {
+                        boolean isWinner = bet.isWinner(num);
+                        System.out.println("Bet was a winner? " + isWinner);
+                        String logString = isWinner ? "WINNING BET! New balance : " : "LOSING BET! New Balance : ";
+                        if (isWinner) {
+                            balance+=bet.getWagerAmount();
+                        } else {
+                            balance-=bet.getWagerAmount();
+                        }
+                        App.player.setBalance((int)balance);
+                        updateCashValue(App.player.getBalance());
+                        AccountsManager.savePlayer(App.player.getName(), (int)balance);
+                        log.getItems().add(logString + text.formattedBalance(balance));
+                    }
+                }
             }
         });
+
+        betSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue<? extends String> selected, String oldValue, String newValue) {
+                if (newValue != null) {
+                    betTypeSelection = newValue;
+                }
+            }
+        });
+    }
+
+    public void createWager() {
+        String newValue = betTypeSelection;
+        String wagerString = wagerAmount.getText();
+        if (wagerString==null) {
+            System.out.println("No wager amount");
+            return;
+        }
+        System.out.println("Wager amount : " + wagerString);
+        Integer wagerAmt = Integer.parseInt(wagerString);
+        System.out.println("Bet selected " + betTypeSelection);
+        switch(newValue) {
+            case "Black":
+                bet = new ColorBet();
+                bet.setWagerAmount(wagerAmt);
+                ((ColorBet)bet).setColor(Color.BLACK);
+                break;
+            case "Red":
+                bet = new ColorBet();
+                bet.setWagerAmount(wagerAmt);
+                ((ColorBet)bet).setColor(Color.RED);
+                break;
+            case "Odd":
+                bet = new OddEvenBet();
+                bet.setWagerAmount(wagerAmt);
+                ((OddEvenBet)bet).setIsEven(false);
+                break;
+            case "Even":
+                bet = new OddEvenBet();
+                bet.setWagerAmount(wagerAmt);
+                ((OddEvenBet)bet).setIsEven(true);
+                break;
+            default:
+                int value = Integer.parseInt(newValue);
+                bet = new NumberBet();
+                bet.setWagerAmount(wagerAmt);
+                ((NumberBet)bet).setNumber(value);
+
+        }
+        App.bet = bet;
     }
 }

@@ -22,6 +22,12 @@ public class OddEvenBet extends Bet
   }
 
   boolean isWinner(int winningNumber) {
-    return (winningNumber % 2 == 0) == isEven;
+    return (winningNumber % 2 == 0) ? isEven : !isEven;
+  }
+
+  @Override
+  public String toString() {
+    String value = isEven ? "Even" : "Odd";
+    return value;
   }
 }
