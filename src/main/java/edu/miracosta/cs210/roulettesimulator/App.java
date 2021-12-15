@@ -17,6 +17,7 @@ public class App extends Application {
     static final double windowHeight = 720.0;
     static Stage window;
     static Player player;
+    static Bet bet;
     static HashMap<String, Scene> scenes = new HashMap<String, Scene>();
     static private ObservableList<Integer> spinList;
 

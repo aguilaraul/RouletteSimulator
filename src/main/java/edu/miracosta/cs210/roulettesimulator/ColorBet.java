@@ -36,4 +36,10 @@ public class ColorBet extends Bet {
     }
     return false;
   }
+
+  @Override
+  public String toString() {
+    String value = betColor == Color.RED ? "Red" : "Black";
+    return value;
+  }
 }

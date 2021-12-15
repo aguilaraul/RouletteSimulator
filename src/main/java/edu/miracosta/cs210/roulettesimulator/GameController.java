@@ -99,43 +99,6 @@ public class GameController {
                 if (newValue != null) {
                     betTypeSelection = newValue;
                 }
-//                    String wagerString = wagerAmount.getText();
-//                    if (wagerString==null) {
-//                        System.out.println("No wager amount");
-//                        return;
-//                    }
-//                    System.out.println("Wager amount : " + wagerString);
-//                    Integer wagerAmt = Integer.parseInt(wagerString);
-//                    System.out.println("Bet selected " + selected);
-//                    switch(newValue) {
-//                        case "Black":
-//                            bet = new ColorBet();
-//                            bet.setWagerAmount(wagerAmt);
-//                            ((ColorBet)bet).setColor(Color.BLACK);
-//                            break;
-//                        case "Red":
-//                            bet = new ColorBet();
-//                            bet.setWagerAmount(wagerAmt);
-//                            ((ColorBet)bet).setColor(Color.RED);
-//                            break;
-//                        case "Odd":
-//                            bet = new OddEvenBet();
-//                            bet.setWagerAmount(wagerAmt);
-//                            ((OddEvenBet)bet).setIsEven(false);
-//                            break;
-//                        case "Even":
-//                            bet = new OddEvenBet();
-//                            bet.setWagerAmount(wagerAmt);
-//                            ((OddEvenBet)bet).setIsEven(true);
-//                            break;
-//                        default:
-//                            int value = Integer.parseInt(newValue);
-//                            bet = new NumberBet();
-//                            bet.setWagerAmount(wagerAmt);
-//                            ((NumberBet)bet).setNumber(value);
-//
-//                    }
-//                }
             }
         });
     }
@@ -178,5 +141,6 @@ public class GameController {
                 ((NumberBet)bet).setNumber(value);
 
         }
+        App.bet = bet;
     }
 }

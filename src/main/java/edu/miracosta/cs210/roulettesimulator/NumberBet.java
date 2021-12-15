@@ -31,4 +31,10 @@ public class NumberBet extends Bet
   public int payout() {
     return 35 * wagerAmount;
   }
+
+  @Override
+  public String toString() {
+    String numberString = "# " + number;
+    return numberString;
+  }
 }
