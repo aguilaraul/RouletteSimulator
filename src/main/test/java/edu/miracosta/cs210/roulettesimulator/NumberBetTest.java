@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NumberBetTest {
 
+    /*
+     * Tests to see if a bet that should win is a winner.
+     * @author Robert Edmonston
+     */
     @Test
     void isWinner() {
         NumberBet win = new NumberBet();
@@ -17,6 +21,10 @@ class NumberBetTest {
         assertEquals(result, winner);
     }
 
+    /*
+     * Tests to see if a bet that should lose is a loser.
+     * @author Austin
+     */
     @Test
     void isLoser() {
         NumberBet win = new NumberBet();
@@ -28,6 +36,10 @@ class NumberBetTest {
         assertEquals(result, winner);
     }
 
+    /*
+     * Tests to see if a bet gives the proper payout.
+     * @author Saghar
+     */
     @Test
     void payout() {
         NumberBet pay = new NumberBet();
