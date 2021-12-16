@@ -9,8 +9,11 @@ class NumberBetTest {
     @Test
     void isWinner() {
         NumberBet win = new NumberBet();
-        boolean result = win.isWinner(1);
-        assertEquals(true, result);
+        boolean result = true;
+        boolean winner;
+        int bet = 1;
+        winner = win.isWinner(bet);
+        assertEquals(result, winner);
     }
 
     @Test
