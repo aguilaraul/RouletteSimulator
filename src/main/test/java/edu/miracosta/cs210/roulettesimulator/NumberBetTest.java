@@ -9,7 +9,7 @@ class NumberBetTest {
     @Test
     void isWinner() {
         NumberBet win = new NumberBet();
-        boolean result = true;
+        boolean result = false;
         boolean winner;
         int bet = 1;
         winner = win.isWinner(bet);
