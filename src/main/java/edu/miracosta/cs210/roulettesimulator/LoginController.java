@@ -45,7 +45,7 @@ public class LoginController {
         }
 
         if(!username.isEmpty() && !passwordField.getText().isBlank()) {
-            App.player = accountsManager.loadPlayer(username);
+            App.player = accountsManager.getInstance().loadPlayer(username);
 
             try {
                 Scanner file = new Scanner (new File(INPUT_FILE));
@@ -64,7 +64,7 @@ public class LoginController {
                     if (userTxt.equals(username) && passwordTxt.equals(passwordField.getText())){
                         //System.out.println("login successful");
                         validLogin = true;
-                        Player player = AccountsManager.loadPlayer(username);
+                        Player player = AccountsManager.getInstance().loadPlayer(username);
                         App.player = player;
                     }
                     else {
@@ -85,7 +85,7 @@ public class LoginController {
 
         if(!username.isEmpty() && !passwordField.getText().isBlank() && validLogin == true) {
             //validLogin = true; // doesn't really do anything yet
-            App.player = AccountsManager.loadPlayer(username);
+            App.player = AccountsManager.getInstance().loadPlayer(username);
             app.changeScene("Roulette Simulator", "game-view.fxml", "css/game.css");
         }
     }

@@ -87,7 +87,7 @@ public class GameController {
                         }
                         App.player.setBalance((int)balance);
                         updateCashValue(App.player.getBalance());
-                        AccountsManager.savePlayer(App.player.getName(), (int)balance);
+                        AccountsManager.getInstance().savePlayer(App.player.getName(), (int)balance);
                         log.getItems().add(logString + text.formattedBalance(balance));
                     }
                 }
